@@ -24,6 +24,10 @@ a{color:inherit}.topbar{height:38px;background:#edf6ffdd;border-bottom:1px solid
 .hero-photo{min-height:245px;border-radius:6px;background:linear-gradient(135deg,#b9dcff,#f8fcff 60%,#a7d2ff);border:1px solid #d2e5ff;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#4d7db9}
 .hero-photo strong{font-family:Georgia,serif;font-size:clamp(23px,4vw,38px);display:block;margin-bottom:12px}.hero-photo small{font-size:12px}
 .hero-note{align-self:center;line-height:2.05;font-size:14px;font-weight:520;letter-spacing:-.025em}.hero-note .scribble{font-family:Pretendard,-apple-system,sans-serif;font-style:normal;font-weight:800;letter-spacing:-.04em;font-size:26px;color:#4c83d0;margin-bottom:8px}
+.debut-dday{display:block;margin:12px 0;padding:12px 13px;border:1px solid #c8e0ff;border-radius:9px;background:linear-gradient(135deg,#f8fcff,#e8f3ff);box-shadow:0 2px 8px #6ba5e51a;line-height:1.55}
+.debut-dday .label{display:block;font-size:12px;font-weight:700;letter-spacing:.035em;color:#6b91c7}
+.debut-dday .count{display:block;font-size:22px;font-weight:850;letter-spacing:-.035em;color:#376fb9;font-variant-numeric:tabular-nums}
+.debut-dday .date{display:block;margin-top:2px;font-size:10px;color:#8ba5c9}
 .caption{text-align:center;font-size:13px;padding:0 12px 12px;color:#4675b8}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:0 14px 14px}
 .card{border:1px solid #a8ccff;border-radius:8px;overflow:hidden;background:#fff}
@@ -44,20 +48,60 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 .faq-q{padding:15px 17px 8px;background:#fff;color:#20242b;font-weight:750;font-size:14px;line-height:1.8;letter-spacing:-.03em}
 .faq-a{padding:5px 17px 17px;font-size:14px;line-height:2;letter-spacing:-.025em;white-space:normal;color:#737b88;background:#fff}
 .faq-a a{color:#477fc7;text-decoration:underline;text-underline-offset:2px}
+
+/* Cyworld-style BGM player */
+.bgm-window{margin:12px 0 0;border:1px solid #a8ccff;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#f8fcff,#eaf4ff);box-shadow:0 3px 10px #4b91d315}
+.bgm-head{padding:10px 13px;background:linear-gradient(#f8fcff,#d7e9ff);border-bottom:1px solid #b4d2ff;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:750}
+.bgm-main{padding:8px}.bgm-now{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid #d4e6ff;border-radius:8px;background:#fff}
+.bgm-disc{width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:radial-gradient(circle,#fff 0 10%,#7fb8f5 11% 18%,#d8ebff 19% 31%,#6fa8ed 32% 54%,#a8d1ff 55% 100%);display:flex;align-items:center;justify-content:center;color:#376fb9;font-size:18px;animation:spin-disc 7s linear infinite;animation-play-state:paused}
+.bgm-disc.playing{animation-play-state:running}@keyframes spin-disc{to{transform:rotate(360deg)}}
+.bgm-nowtext{min-width:0;flex:1}.bgm-nowtext strong{display:block;font-size:13px;overflow-wrap:anywhere}.bgm-nowtext span{display:block;color:#7997bf;font-size:11px;margin-top:4px}
+.bgm-video{display:none;margin-top:8px;aspect-ratio:16/9;border:1px solid #c7dfff;border-radius:7px;overflow:hidden;background:#eaf4ff}.bgm-video.show{display:block}.bgm-video iframe{width:100%;height:100%;border:0;display:block}.bgm-controls{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}.bgm-controls button{border:1px solid #a8ccff;background:#fff;border-radius:7px;color:#376fb9;padding:6px 7px;font:inherit;font-size:12px;cursor:pointer}.bgm-controls button:hover{background:#e5f1ff}
+.bgm-tabs{display:flex;gap:6px;margin:12px 0 8px}.bgm-tabs button{flex:1;border:1px solid #c9dfff;background:#fff;color:#537ba9;border-radius:7px;padding:7px 6px;font:inherit;font-size:12px;cursor:pointer}.bgm-tabs button.active{background:#dcecff;border-color:#8ebdff;color:#315fa9;font-weight:750}
+.bgm-list{display:grid;gap:4px;max-height:150px;overflow:auto}.bgm-track{display:flex;gap:5px;align-items:center;text-align:left;width:100%;border:1px solid transparent;background:#ffffffb8;border-radius:6px;padding:6px 5px;color:#365c91;font:inherit;cursor:pointer}.bgm-track:hover,.bgm-track.active{background:#e2efff;border-color:#b5d4ff}.bgm-track .track-no{font-size:10px;color:#8ca8ce;width:18px}.bgm-track .track-name{font-size:12px;font-weight:650;flex:1}.bgm-track .track-artist{font-size:10px;color:#7d98bb}.bgm-help{font-size:9px;line-height:1.6;color:#7e98bb;margin:10px 2px 0}
+
+.guestbook-form{display:grid;gap:8px;margin:16px 0}.guestbook-form label{font-size:13px;font-weight:bold;color:#4778b8}.guestbook-form input,.guestbook-form textarea{width:100%;border:1px solid #c6ddfb;border-radius:7px;padding:10px;font:inherit;font-size:13px;color:var(--ink);background:#fbfdff;resize:vertical}.guestbook-form input:focus,.guestbook-form textarea:focus{outline:2px solid #c3ddff}.guestbook-form .action{background:#edf6ff;border-color:#b9d5ff;text-align:center}.guestbook-note{font-size:11px;line-height:1.7;color:#7188a9;background:#f7fbff;border:1px dashed #c8defa;border-radius:7px;padding:10px}.guest-entries{display:grid;gap:9px;margin-top:14px}.guest-entry{border:1px solid #d5e6fb;border-radius:7px;padding:11px;background:#fbfdff}.guest-entry-head{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#4b7bb8}.guest-entry-head time{font-size:10px;color:#8aa0be}.guest-entry p{font-size:13px;line-height:1.7;white-space:normal;overflow-wrap:anywhere;margin:8px 0 0}.guest-empty{font-size:12px;color:#7d97bc;text-align:center;padding:18px}
+
+/* Junseo's birthday celebration: appears automatically every November 20 */
+.birthday-banner{display:none;max-width:1120px;margin:12px auto 0;padding:13px 18px;text-align:center;border:1px solid #f0c7e8;border-radius:10px;background:linear-gradient(100deg,#fff2fb,#fff9e8,#eef7ff);color:#a64d91;box-shadow:0 4px 16px #d98cc522;font-weight:800;letter-spacing:.02em;animation:bday-glow 2s ease-in-out infinite alternate}
+.birthday-banner.show{display:block}
+@keyframes bday-glow{from{box-shadow:0 3px 12px #d98cc51c}to{box-shadow:0 5px 22px #d98cc566}}
+.birthday-confetti{position:fixed;top:-24px;z-index:30;pointer-events:none;animation:bday-fall linear forwards;will-change:transform,opacity}
+@keyframes bday-fall{0%{transform:translate3d(0,-5vh,0) rotate(0deg);opacity:0}10%{opacity:1}100%{transform:translate3d(var(--drift),110vh,0) rotate(700deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){.birthday-banner{animation:none}.birthday-confetti{display:none}}
+
+@media(max-width:760px){.bgm-window{margin:0 10px 14px}}
+
 @media(max-width:520px){.bio-list{grid-template-columns:100px minmax(0,1fr)}.bio-list div{padding:11px 12px;font-size:13px}.faq-q,.faq-a{font-size:13px}}
 
-@media(max-width:760px){.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:100px 1fr;align-items:center}.sidebar .titlebar{grid-column:1/-1}.avatar{height:100px;margin:10px}.avatar .heart{font-size:27px}.side-name{display:none}.profile-mini{margin:10px 10px 10px 0}.menu{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));padding:0 10px 10px}.side-footer{display:none}.hero{grid-template-columns:1fr}.hero-photo{min-height:190px}.hero-note{text-align:center}.cards{grid-template-columns:1fr}.topbar{padding:0 10px}.topbar nav{gap:9px}.topbar nav a:nth-child(2){display:none}}
+
+.guestbook-form{display:grid;gap:8px;margin:16px 0}.guestbook-form label{font-size:13px;font-weight:bold;color:#4778b8}.guestbook-form input,.guestbook-form textarea{width:100%;border:1px solid #c6ddfb;border-radius:7px;padding:10px;font:inherit;font-size:13px;color:var(--ink);background:#fbfdff;resize:vertical}.guestbook-form input:focus,.guestbook-form textarea:focus{outline:2px solid #c3ddff}.guestbook-form .action{background:#edf6ff;border-color:#b9d5ff;text-align:center}.guestbook-note{font-size:11px;line-height:1.7;color:#7188a9;background:#f7fbff;border:1px dashed #c8defa;border-radius:7px;padding:10px}.guest-entries{display:grid;gap:9px;margin-top:14px}.guest-entry{border:1px solid #d5e6fb;border-radius:7px;padding:11px;background:#fbfdff}.guest-entry-head{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#4b7bb8}.guest-entry-head time{font-size:10px;color:#8aa0be}.guest-entry p{font-size:13px;line-height:1.7;white-space:normal;overflow-wrap:anywhere;margin:8px 0 0}.guest-empty{font-size:12px;color:#7d97bc;text-align:center;padding:18px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:100px 1fr;align-items:center}.sidebar .titlebar{grid-column:1/-1}.avatar{height:100px;margin:10px}.avatar .heart{font-size:27px}.side-name{display:none}.profile-mini{margin:10px 10px 10px 0;min-width:0}.profile-mini .bgm-window{margin-top:10px}.profile-mini .bgm-head{padding:8px 9px;font-size:11px}.profile-mini .bgm-tabs button{font-size:10px}.profile-mini .bgm-now{padding:8px;gap:8px}.menu{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));padding:0 10px 10px}.side-footer{display:none}.hero{grid-template-columns:1fr}.hero-photo{min-height:190px}.hero-note{text-align:center}.cards{grid-template-columns:1fr}.topbar{padding:0 10px}.topbar nav{gap:9px}.topbar nav a:nth-child(2){display:none}}
 </style>
 </head>
 <body>
-<div class="topbar"><nav><a href="#" data-page="home">⌂ 홈</a><a href="#" data-page="home">♡ 미니홈피</a><a href="#" data-page="profile">♙ Profile</a><a href="#" data-page="faq">✉ FAQ</a></nav><span>ALPHA DRIVE ONE　|　KIM JUNSEO ♡</span></div>
-<div class="sky-note">준서야, 지금처럼만 항상 빛나줘 ♡</div>
+<div class="topbar"><nav><a href="#" data-page="home">⌂ 홈</a><a href="#" data-page="home">♡ 미니홈피</a><a href="#" data-page="profile">♙ Profile</a><a href="#" data-page="faq">✉ FAQ</a></nav><span>@muyaa_0　|　<a class="contact-link" href="https://spin-spin.com/muyya__?v=1792820494920" target="_blank" rel="noopener noreferrer">문의</a></span></div>
+<div id="birthdayBanner" class="birthday-banner" role="status" aria-live="polite">🎂　HAPPY JUNSEO DAY　♡　준서야, 생일 축하해! 오늘 하루 누구보다 행복하길 ☁　🎉</div>
 <div class="layout">
   <aside class="window sidebar">
-    <div class="titlebar"><span>ALD1　♡　KIM JUNSEO</span><span class="dots">•••</span></div>
+    <div class="titlebar"><span>♡　KIM JUNSEO</span><span class="dots">•••</span></div>
     <div class="avatar" style="padding:0;overflow:hidden"><img src="images/junseo-profile.png" alt="김준서 프로필 사진" style="width:100%;height:100%;object-fit:cover"></div>
-    <div class="side-name">Kim Junseo ♡</div>
-    <div class="profile-mini">ALPHA DRIVE ONE<br>KIM JUNSEO<br>늘, 준서랑 ♡<br><span style="color:#7ba7df">오늘도 행복하자 ☁</span></div>
+    <div class="profile-mini">
+    <section class="bgm-window" aria-label="BGM 플레이어">
+      <div class="bgm-head"><span>♫　JUNSEO'S BGM ♡</span><span class="dots">♪ ♫ ♪</span></div>
+      <div class="bgm-main">
+        <div class="bgm-now">
+          <div class="bgm-disc" id="bgmDisc">♫</div>
+          <div class="bgm-nowtext"><strong id="bgmCurrentTitle">FREAK ALARM</strong><span id="bgmCurrentArtist">ALPHA DRIVE ONE · YouTube</span></div>
+        </div>
+        <div class="bgm-controls"><button id="bgmPlayCurrent" type="button">▶ 선택한 곡 재생</button></div>
+        <div class="bgm-video" id="bgmVideo"><iframe id="bgmIframe" title="YouTube BGM player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="bgm-tabs"><button type="button" class="active" data-bgm-group="ald1">ALPHA DRIVE ONE</button><button type="button" data-bgm-group="wei">WEi</button></div>
+        <div class="bgm-list" id="bgmList"></div>
+        <p class="bgm-help">곡을 선택한 뒤 재생 버튼을 누르면 페이지 안에서 재생돼요. 아직 영상 연결이 안 된 곡은 이곳에 안내가 표시됩니다.</p>
+      </div>
+    </section>
+    </div>
     <nav class="menu">
       <button class="active" data-page="home">⌂　Home</button>
       <button data-page="profile">▣　Profile | Notion</button>
@@ -71,14 +115,22 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
     <div class="titlebar"><span id="mainTitle">⌂　Main</span><span class="dots">□　×</span></div>
     <section class="hero">
       <div class="hero-photo" style="padding:0;overflow:hidden;position:relative"><img src="images/junseo-hero.png" alt="김준서" style="width:100%;height:100%;min-height:245px;object-fit:cover;object-position:center 28%"><div style="position:absolute;left:18px;bottom:16px;color:white;text-shadow:0 1px 5px #173c6d"><strong style="font-size:24px">KIM JUNSEO ♡</strong></div></div>
-      <div class="hero-note"><div class="scribble">Junseo ♡</div>sunshine boy<br>big brother<br>navigation<br>beatbox<br>happy virus<br><span style="font-size:21px">우리 준서 ☁</span></div>
+      <div class="hero-note"><div class="debut-dday"><span class="label">WEi Debut</span><span class="count" data-dday="2020-10-05">D+2210</span><span class="date">2020.10.05</span></div><div class="debut-dday"><span class="label">ALD1 Debut</span><span class="count" data-dday="2026-01-12">D+285</span><span class="date">2026.01.12</span></div></div>
     </section>
+
+
     <div class="caption">준서야, 언제나 네 곁에 있을게 ♡</div>
     <section class="cards">
-      <article class="card"><div class="titlebar">▣　Profile | Notion <span>□ ×</span></div><div class="card-body"><h3>▣　Profile</h3><p>이름, 생일, 별명, 가족, 그룹 활동 등 준서의 프로필을 정리했어요.</p><button class="action" data-page="profile">바로가기　→</button></div></article>
-      <article class="card"><div class="titlebar">ⓘ　김준서 FAQ <span>□ ×</span></div><div class="card-body"><h3>ⓘ　FAQ</h3><p>콩프라는 별명부터 모에화, 편지, 입덕 포인트까지 자주 묻는 질문을 모았어요.</p><button class="action" data-page="faq">바로가기　→</button></div></article>
+      <article class="card"><div class="titlebar">▣　Profile | Notion <span>□ ×</span></div><div class="card-body"><h3>▣　Profile</h3><p>About. 준서</p><button class="action" data-page="profile">바로가기　→</button></div></article>
+      <article class="card"><div class="titlebar">ⓘ　김준서 FAQ <span>□ ×</span></div><div class="card-body"><h3>ⓘ　FAQ</h3><p>자주 묻는 질문</p><button class="action" data-page="faq">바로가기　→</button></div></article>
       <article class="card"><div class="titlebar">♥　Twitter / X <span>□ ×</span></div><div class="card-body"><div class="social-preview"><div class="handle">@ALD1_offcial</div><div class="muted">#준서 · 공식 계정 및 해시태그 검색</div><p>최신 게시물은 X에서 확인할 수 있어요. 이 사이트는 API 인증 전까지 게시물 전체를 자동 수집하지 않습니다.</p></div><button class="action" data-page="twitter">게시물 보기　→</button></div></article>
       <article class="card"><div class="titlebar">◎　Instagram <span>□ ×</span></div><div class="card-body"><div class="social-preview"><div class="handle">@ald1.official</div><div class="muted">#준서 · 사진과 게시물</div><p>인스타그램의 공식 계정과 해시태그 검색으로 연결돼요.</p></div><button class="action" data-page="instagram">사진 보러 가기　→</button></div></article>
+    </section>
+    <section class="home-guestbook" style="margin:0 20px 22px;padding:18px;border:1px solid #cfe2fb;border-radius:8px;background:linear-gradient(180deg,#f8fbff,#edf6ff)">
+      <div class="titlebar" style="margin:-18px -18px 14px;border-radius:8px 8px 0 0">✎　방명록 / Message <span>♡ ☁</span></div>
+      <div class="notice" style="margin-bottom:10px">준서에게 예쁜 말을 남겨주세요 ☁</div>
+      <form id="homeGuestbookForm" class="guestbook-form"><label for="homeGuestName">닉네임</label><input id="homeGuestName" maxlength="24" placeholder="닉네임을 입력해 주세요" required><label for="homeGuestMessage">Message</label><textarea id="homeGuestMessage" maxlength="500" rows="3" placeholder="따뜻한 한마디를 남겨 주세요 ☁" required></textarea><button class="action" type="submit">방명록 남기기 ♡</button></form>
+      <div class="guestbook-note" id="homeGuestbookNote">공개 방명록을 불러오는 중이에요 ☁</div><div id="homeGuestEntries" class="guest-entries"></div>
     </section>
   </main>
 </div>
@@ -87,6 +139,103 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
  <div class="modal"><div class="titlebar"><span id="modalTitle">Profile</span><button class="close" id="closeModal">닫기 ×</button></div><div class="modal-content" id="modalContent"></div></div>
 </div>
 <script>
+// Debut day is counted as D+0; the counters update automatically each day.
+function updateDebutDDays(){
+ const today=new Date();
+ const todayUTC=Date.UTC(today.getFullYear(),today.getMonth(),today.getDate());
+ document.querySelectorAll('[data-dday]').forEach(el=>{
+  const parts=el.dataset.dday.split('-').map(Number);
+  const startUTC=Date.UTC(parts[0],parts[1]-1,parts[2]);
+  const days=Math.floor((todayUTC-startUTC)/86400000);
+  el.textContent=days>=0?`D+${days}`:`D${days}`;
+ });
+}
+updateDebutDDays();
+
+// Birthday celebration automatically activates on November 20 in the visitor's local time.
+(function initJunseoBirthday(){
+ const now=new Date();
+ if(now.getMonth()!==10||now.getDate()!==20)return;
+ const banner=document.getElementById('birthdayBanner');
+ banner.classList.add('show');
+ const symbols=['♡','✦','🎉','💙','🎂','✧'];
+ const colors=['#f4a7d7','#8fc8ff','#f7cf74','#b6a5ff','#ffb5b5'];
+ for(let i=0;i<42;i++){
+  const bit=document.createElement('span');
+  bit.className='birthday-confetti';
+  bit.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+  bit.style.left=(Math.random()*100)+'vw';
+  bit.style.color=colors[Math.floor(Math.random()*colors.length)];
+  bit.style.fontSize=(12+Math.random()*15)+'px';
+  bit.style.setProperty('--drift',((Math.random()-.5)*28)+'vw');
+  bit.style.animationDuration=(6+Math.random()*7)+'s';
+  bit.style.animationDelay=(Math.random()*5)+'s';
+  document.body.appendChild(bit);
+  bit.addEventListener('animationend',()=>bit.remove());
+ }
+})();
+
+
+// YouTube-connected BGM playlist. Playback stays inside this page; tracks without a verified video ID show an in-page notice.
+const BGM={
+ ald1:[
+  {title:'FREAK ALARM',artist:'ALPHA DRIVE ONE',id:'P8VVnopM610'},
+  {title:'FORMULA',artist:'ALPHA DRIVE ONE'},
+  {title:'Chains',artist:'ALPHA DRIVE ONE'},
+  {title:'Raw Flame',artist:'ALPHA DRIVE ONE'},
+  {title:'OMG!',artist:'ALPHA DRIVE ONE'},
+  {title:'Good Life',artist:'ALPHA DRIVE ONE'},
+  {title:'Cinnamon Shake',artist:'ALPHA DRIVE ONE'},
+  {title:'GO! GO!',artist:'ALPHA DRIVE ONE'},
+  {title:'BORN DIRE',artist:'ALPHA DRIVE ONE'},
+  {title:'Diamond Hour',artist:'ALPHA DRIVE ONE'},
+  {title:'Talk to me',artist:'ALPHA DRIVE ONE'}
+ ],
+ wei:[
+  {title:'TWILIGHT',artist:'WEi'},
+  {title:'All Or Nothing',artist:'WEi'},
+  {title:'BYE BYE BYE',artist:'WEi'},
+  {title:'Starry Night',artist:'WEi'},
+  {title:'Too Bad',artist:'WEi',id:'YmiKbzPtxoc'},
+  {title:'Maldives',artist:'WEi'},
+  {title:'Spray',artist:'WEi'},
+  {title:'OVERDRIVE',artist:'WEi'},
+  {title:'Gift For You',artist:'WEi'},
+  {title:'HOME',artist:'WEi'},
+  {title:'LOVE2YOU',artist:'WEi'}
+ ]
+};
+let bgmGroup='ald1', bgmTrack=BGM.ald1[0];
+const bgmList=document.getElementById('bgmList'), bgmTitle=document.getElementById('bgmCurrentTitle'), bgmArtist=document.getElementById('bgmCurrentArtist'), bgmDisc=document.getElementById('bgmDisc'), bgmVideo=document.getElementById('bgmVideo');
+const bgmIframe=document.getElementById('bgmIframe');
+const bgmIframeMarkup=bgmIframe.outerHTML;
+function renderBgm(){
+ bgmList.innerHTML='';
+ BGM[bgmGroup].forEach((track,i)=>{
+  const b=document.createElement('button');b.type='button';b.className='bgm-track'+(track===bgmTrack?' active':'');
+  b.innerHTML='<span class="track-no">'+String(i+1).padStart(2,'0')+'</span><span class="track-name"></span><span class="track-artist">'+(track.id?'▶':'♪')+'</span>';
+  b.querySelector('.track-name').textContent=track.title;
+  b.addEventListener('click',()=>{bgmTrack=track;bgmTitle.textContent=track.title;bgmArtist.textContent=track.artist+' · YouTube';bgmDisc.classList.remove('playing');renderBgm();});
+  bgmList.appendChild(b);
+ });
+ document.querySelectorAll('[data-bgm-group]').forEach(b=>b.classList.toggle('active',b.dataset.bgmGroup===bgmGroup));
+}
+document.querySelectorAll('[data-bgm-group]').forEach(b=>b.addEventListener('click',()=>{bgmGroup=b.dataset.bgmGroup;bgmTrack=BGM[bgmGroup][0];bgmTitle.textContent=bgmTrack.title;bgmArtist.textContent=bgmTrack.artist+' · YouTube';bgmDisc.classList.remove('playing');renderBgm();}));
+document.getElementById('bgmPlayCurrent').addEventListener('click',()=>{
+ if(!document.getElementById('bgmIframe')) bgmVideo.innerHTML=bgmIframeMarkup;
+ const currentIframe=document.getElementById('bgmIframe');
+ bgmVideo.classList.add('show');
+ if(bgmTrack.id){
+  currentIframe.src='https://www.youtube-nocookie.com/embed/'+bgmTrack.id+'?autoplay=1&rel=0';
+  bgmDisc.classList.add('playing');
+ }else{
+  currentIframe.removeAttribute('src');
+  bgmDisc.classList.remove('playing');
+  bgmVideo.innerHTML='<div style="height:100%;min-height:100px;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;color:#537ba9;font-size:12px;line-height:1.7">♪ '+bgmTrack.title+'<br>아직 이 곡의 영상이 연결되지 않았어요.<br>다른 곡을 선택해 주세요 ☁</div>';
+ }
+});
+renderBgm();
+
 const LINKS={
  profile:"https://app.notion.com/p/Profile-28c18463384580748e2cf0d0348bbdf8",
  faq:"https://app.notion.com/p/FAQ-291184633845809bac4eff1b17e96c87?source=copy_link",
@@ -97,7 +246,7 @@ const overlay=document.getElementById('overlay'), modalTitle=document.getElement
 function showPage(page){
  document.querySelectorAll('.menu button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
  if(page==='home'){mainTitle.textContent='⌂　Main';return}
- const titles={profile:'▣　Profile | Notion',faq:'ⓘ　김준서 FAQ',twitter:'♥　Twitter / X · #준서',instagram:'◎　Instagram · #준서'};
+ const titles={profile:'▣　Profile | Notion',faq:'ⓘ　김준서 FAQ',twitter:'♥　Twitter / X · #준서',instagram:'◎　Instagram · #준서',guestbook:'✎　방명록 / Message'};
  modalTitle.textContent=titles[page]||'Minihompy'; modalContent.innerHTML='';
  if(page==='profile'){
    modalContent.innerHTML=`<div class="notice">KIM JUN SEO · PROFILE ♡<br>팬이 제공한 프로필 내용을 바탕으로 정리했어요.</div>
@@ -130,9 +279,37 @@ function showPage(page){
    const s=document.createElement('script');s.src='https://platform.twitter.com/widgets.js';s.async=true;modalContent.appendChild(s);
  } else if(page==='instagram'){
    modalContent.innerHTML=`<div class="insta-box"><div style="font-size:36px">◎ ♡</div><strong>@ald1.official</strong><p>Instagram 공식 계정과 #준서 검색 결과를 확인할 수 있어요.</p><p><a href="${LINKS.instagram}" target="_blank" rel="noopener">공식 Instagram 계정 열기 ↗</a></p><p><a href="https://www.instagram.com/explore/tags/%EC%A4%80%EC%84%9C/" target="_blank" rel="noopener">Instagram에서 #준서 검색 ↗</a></p><small>공개 게시물 자동 수집은 Meta API의 접근 권한과 정책에 따라 달라집니다. 현재는 계정 비밀번호나 인증 정보를 요구하지 않습니다.</small></div>`;
+ } else if(page==='guestbook'){
+   modalContent.innerHTML=`<div class="notice">방명록은 미니홈피 첫 화면에서 바로 남길 수 있어요 ☁</div><button class="action" id="backToGuestbookHome">첫 화면 방명록 보기 ♡</button>`;
+   document.getElementById('backToGuestbookHome').addEventListener('click',()=>{close();showPage('home');document.querySelector('.home-guestbook').scrollIntoView({behavior:'smooth',block:'start'})});
  }
  overlay.classList.add('open');document.body.style.overflow='hidden';
 }
+// Shared public guestbook embedded directly on the home page.
+(function initHomeGuestbook(){
+ const form=document.getElementById('homeGuestbookForm');
+ if(!form)return;
+ const box=document.getElementById('homeGuestEntries'), note=document.getElementById('homeGuestbookNote');
+ const SUPABASE_URL='https://szxdnpbuecibkcdwzddq.supabase.co';
+ const SUPABASE_ANON_KEY='sb_publishable_mFivODzaPj-EAdbN3GfuBg_lWIj7afJ';
+ const ready=SUPABASE_URL.startsWith('https://')&&!SUPABASE_URL.includes('YOUR_')&&!SUPABASE_ANON_KEY.includes('YOUR_')&&SUPABASE_ANON_KEY.length>10;
+ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ let entries=[];
+ const render=()=>{if(!entries.length){box.innerHTML='<p class="guest-empty">첫 번째 방명록을 남겨 주세요! ☁</p>';return}box.innerHTML=entries.map(item=>`<article class="guest-entry"><div class="guest-entry-head"><strong>${esc(item.nickname||'ALLYZ')}</strong><time>${esc(item.created_at?new Date(item.created_at).toLocaleString('ko-KR'):item.date||'')}</time></div><p>${esc(item.message).replace(/\n/g,'<br>')}</p></article>`).join('')};
+ const headers=()=>({'Content-Type':'application/json','apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+SUPABASE_ANON_KEY,'Prefer':'return=representation'});
+ async function load(){
+  if(!ready){note.textContent='Supabase 연결 설정을 확인해 주세요 ☁';render();return}
+  note.textContent='모두가 함께 보는 공개 방명록이에요 ☁';
+  try{const r=await fetch(`${SUPABASE_URL}/rest/v1/guestbook?select=id,nickname,message,created_at&order=created_at.desc&limit=100`,{headers:headers()});if(!r.ok)throw Error('load');entries=await r.json();render()}
+  catch(e){note.textContent='방명록을 불러오지 못했어요. Supabase 주소·키·테이블 정책을 확인해 주세요.';box.innerHTML='<p class="guest-empty">잠시 후 다시 확인해 주세요 ☁</p>'}
+ }
+ load();
+ form.addEventListener('submit',async e=>{e.preventDefault();const name=document.getElementById('homeGuestName').value.trim(),message=document.getElementById('homeGuestMessage').value.trim();if(!name||!message)return;const btn=form.querySelector('button');btn.disabled=true;btn.textContent='남기는 중…';
+  try{const r=await fetch(`${SUPABASE_URL}/rest/v1/guestbook`,{method:'POST',headers:headers(),body:JSON.stringify({nickname:name,message})});if(!r.ok)throw Error('save');const saved=await r.json();entries=[...saved,...entries];note.textContent='방명록을 남겼어요. 고마워요 ☁';form.reset();render()}
+  catch(err){note.textContent='저장에 실패했어요. 연결 설정과 인터넷을 확인해 주세요.'}
+  finally{btn.disabled=false;btn.textContent='방명록 남기기 ♡'}
+ });
+})();
 document.querySelectorAll('[data-page]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();showPage(el.dataset.page)}));
 function close(){overlay.classList.remove('open');document.body.style.overflow=''}
 document.getElementById('closeModal').addEventListener('click',close);
