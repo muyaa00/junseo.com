@@ -128,6 +128,56 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
   .junseo-bubble{font-size:11px;padding:7px 10px;max-width:86%}
 }
 
+
+/* Mobile layout fixes: keep every section in normal document flow */
+@media (max-width: 760px) {
+  html, body { width: 100%; overflow-x: hidden; }
+  .topbar { height: auto; min-height: 42px; padding: 8px 12px; gap: 8px; flex-wrap: wrap; }
+  .topbar nav { display: flex; flex-wrap: wrap; gap: 8px 12px; min-width: 0; }
+  .topbar > span { font-size: 11px; white-space: nowrap; }
+  .sky-note { padding: 0 12px; margin: 14px auto 10px; }
+  .layout { display: flex; flex-direction: column; width: 100%; max-width: 100%; padding: 0 10px; gap: 12px; margin-bottom: 18px; }
+  .sidebar, .main, .window { width: 100%; min-width: 0; }
+  .sidebar { display: flex; flex-direction: column; align-items: stretch; }
+  .sidebar > .titlebar { width: 100%; }
+  .sidebar > .avatar { width: auto; height: 90px; margin: 10px; flex: 0 0 auto; }
+  .sidebar > .side-name { display: none; }
+  .sidebar > .profile-mini { width: auto; min-width: 0; margin: 0 10px 12px; padding: 10px; }
+  .sidebar > .menu { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0 10px 10px; }
+  .sidebar > .side-footer { display: none; }
+  .junseo-miniroom { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 1 / 1; margin: 0 auto 10px; }
+  .junseo-bubble { top: 3.5%; max-width: calc(100% - 24px); white-space: normal; font-size: clamp(11px, 3.2vw, 14px); padding: 7px 10px; }
+  .bgm-window { width: 100%; min-width: 0; margin: 0 0 2px; }
+  .bgm-head { gap: 8px; flex-wrap: wrap; }
+  .bgm-main { min-width: 0; padding: 8px; }
+  .bgm-now { min-width: 0; gap: 9px; padding: 9px; }
+  .bgm-nowtext { min-width: 0; overflow-wrap: anywhere; }
+  .bgm-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bgm-tabs button { min-width: 0; overflow-wrap: anywhere; }
+  .bgm-list { min-width: 0; max-height: 220px; }
+  .hero { display: flex; flex-direction: column; gap: 14px; padding: 12px; }
+  .hero-photo { width: 100%; min-width: 0; min-height: 0; aspect-ratio: 4 / 3; padding: 0; }
+  .hero-photo img { width: 100%; height: 100%; min-height: 0 !important; object-fit: cover; }
+  .hero-note { min-width: 0; overflow-wrap: anywhere; }
+  .cards { grid-template-columns: minmax(0, 1fr); padding: 0 10px 10px; gap: 10px; }
+  .card, .card-body { min-width: 0; }
+  .bio-list { grid-template-columns: minmax(85px, 30%) minmax(0, 1fr); }
+  .birthday-banner { margin: 10px; overflow-wrap: anywhere; }
+  footer { margin: 0 10px 16px; padding: 12px; }
+  .overlay { padding: 10px; }
+  .modal { width: 100%; max-width: 100%; height: 92dvh; }
+  .modal-content { min-width: 0; padding: 12px; }
+  .modal-content iframe { min-height: 55vh; }
+}
+@media (max-width: 380px) {
+  .topbar nav { gap: 7px; font-size: 11px; }
+  .profile-mini { padding: 8px !important; }
+  .junseo-bubble { font-size: 11px; padding: 6px 8px; }
+  .bgm-head { font-size: 11px; padding: 8px; }
+  .bgm-track .track-artist { display: none; }
+  .menu button { padding: 9px 7px; font-size: 12px; }
+}
+
 </style>
 </head>
 <body>
@@ -374,7 +424,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 
 // Choose one greeting per calendar day, so the bubble changes daily.
 (function setDailyJunseoMessage(){
-  const messages = ["앨리즈 사랑해요!", "맑은 날씨가 좋아!", "맛있는 밥 먹어!", "깅영웡", "항상 고마워요."];
+  const messages = ["앨리즈 사랑해요!", "날이 맑아서 좋다", "맛있는 밥 먹어!", "깅영웡", "오늘 하늘이 예쁘다"];
   const now = new Date();
   const dayKey = now.getFullYear() * 10000 + (now.getMonth()+1) * 100 + now.getDate();
   let seed = dayKey;
