@@ -290,6 +290,37 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
   .bgm-controls button { flex: 1 1 100%; }
 }
 
+
+/* Cute coming-soon fence for social features */
+.social-preview.coming-soon {
+  position: relative;
+  min-height: 128px;
+  overflow: hidden;
+  border: 1px dashed #9dbde9;
+  border-radius: 8px;
+  background: linear-gradient(180deg,#f7fbff,#e8f3ff);
+  padding: 12px;
+  text-align: center;
+}
+.social-preview.coming-soon .fence-art {
+  font-size: 19px;
+  letter-spacing: 2px;
+  color: #6d95cb;
+  margin: 8px 0;
+  white-space: nowrap;
+}
+.social-preview.coming-soon .coming-label {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #b7d0f2;
+  border-radius: 999px;
+  background: #fff;
+  color: #5279b5;
+  font-size: 12px;
+  font-weight: 700;
+}
+.social-preview.coming-soon p { margin: 7px 0 0; font-size: 12px; color: #6682a8; line-height: 1.6; }
+
 </style>
 </head>
 <body>
@@ -319,7 +350,7 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
     </div>
     <nav class="menu">
       <button class="active" data-page="home">⌂　Home</button>
-      <button data-page="profile">▣　Profile | Notion</button>
+      <button data-page="profile">▣　Profile</button>
       <button data-page="faq">ⓘ　김준서 FAQ</button>
       <button data-page="twitter">♥　Twitter / X</button>
       <button data-page="instagram">◎　Instagram</button>
@@ -336,10 +367,10 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 
     <div class="caption">준서야, 언제나 네 곁에 있을게 ♡</div>
     <section class="cards">
-      <article class="card"><div class="titlebar">▣　Profile | Notion <span>□ ×</span></div><div class="card-body"><h3>▣　Profile</h3><p>About. 준서</p><button class="action" data-page="profile">바로가기　→</button></div></article>
+      <article class="card"><div class="titlebar">▣　Profile <span>□ ×</span></div><div class="card-body"><h3>▣　Profile</h3><p>About. 준서</p><button class="action" data-page="profile">프로필 보기　→</button></div></article>
       <article class="card"><div class="titlebar">ⓘ　김준서 FAQ <span>□ ×</span></div><div class="card-body"><h3>ⓘ　FAQ</h3><p>자주 묻는 질문</p><button class="action" data-page="faq">바로가기　→</button></div></article>
-      <article class="card"><div class="titlebar">♥　Twitter / X <span>□ ×</span></div><div class="card-body"><div class="social-preview"><div class="handle">@ALD1_offcial</div><div class="muted">#준서 · 공식 계정 및 해시태그 검색</div><p>최신 게시물은 X에서 확인할 수 있어요. 이 사이트는 API 인증 전까지 게시물 전체를 자동 수집하지 않습니다.</p></div><button class="action" data-page="twitter">게시물 보기　→</button></div></article>
-      <article class="card"><div class="titlebar">◎　Instagram <span>□ ×</span></div><div class="card-body"><div class="social-preview"><div class="handle">@ald1.official</div><div class="muted">#준서 · 사진과 게시물</div><p>인스타그램의 공식 계정과 해시태그 검색으로 연결돼요.</p></div><button class="action" data-page="instagram">사진 보러 가기　→</button></div></article>
+      <article class="card"><div class="titlebar">♥　Twitter / X <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><div class="fence-art">♡ ║ ║ ║ ♡</div><p>X 게시물 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="twitter">업데이트 기다리기 ♡</button></div></article>
+      <article class="card"><div class="titlebar">◎　Instagram <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><div class="fence-art">♡ ║ ║ ║ ♡</div><p>Instagram 사진 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="instagram">업데이트 기다리기 ♡</button></div></article>
     </section>
     <section class="home-guestbook" style="margin:0 20px 22px;padding:18px;border:1px solid #cfe2fb;border-radius:8px;background:linear-gradient(180deg,#f8fbff,#edf6ff)">
       <div class="titlebar" style="margin:-18px -18px 14px;border-radius:8px 8px 0 0">✎　방명록 / Message <span>♡ ☁</span></div>
@@ -455,8 +486,6 @@ document.getElementById('bgmPlayCurrent').addEventListener('click',startBgmTrack
 renderBgm();
 
 const LINKS={
- profile:"https://app.notion.com/p/Profile-28c18463384580748e2cf0d0348bbdf8",
- faq:"https://app.notion.com/p/FAQ-291184633845809bac4eff1b17e96c87?source=copy_link",
  twitter:"https://x.com/search?q=%23%EC%A4%80%EC%84%9C%20(from%3AALD1_offcial)&src=typed_query&f=live",
  instagram:"https://www.instagram.com/ald1.official/"
 };
@@ -464,10 +493,10 @@ const overlay=document.getElementById('overlay'), modalTitle=document.getElement
 function showPage(page){
  document.querySelectorAll('.menu button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
  if(page==='home'){mainTitle.textContent='⌂　Main';return}
- const titles={profile:'▣　Profile | Notion',faq:'ⓘ　김준서 FAQ',twitter:'♥　Twitter / X · #준서',instagram:'◎　Instagram · #준서',guestbook:'✎　방명록 / Message'};
+ const titles={profile:'▣　Profile',faq:'ⓘ　김준서 FAQ',twitter:'♥　Twitter / X · #준서',instagram:'◎　Instagram · #준서',guestbook:'✎　방명록 / Message'};
  modalTitle.textContent=titles[page]||'Minihompy'; modalContent.innerHTML='';
  if(page==='profile'){
-   modalContent.innerHTML=`<div class="notice">KIM JUN SEO · PROFILE ♡<br>팬이 제공한 프로필 내용을 바탕으로 정리했어요.</div>
+   modalContent.innerHTML=`<div class="notice">KIM JUN SEO · PROFILE ♡</div>
    <div class="bio-list">
    <div>이름</div><div>김준서 (KIM JUN SEO)</div>
    <div>생년월일</div><div>2001.11.20</div>
@@ -482,21 +511,20 @@ function showPage(page){
    <div>경력</div><div>원더나인 (2019.04.13. ~ 2020.08.08.)</div>
    <div>태그</div><div>#🦊　#☀️</div>
    </div>
-   <div class="notice">원본 노션 페이지 ↗ <a href="${LINKS.profile}" target="_blank" rel="noopener">Profile | Notion 열기</a></div>`;
+
  } else if(page==='faq'){
-   modalContent.innerHTML=`<div class="notice">KIM JUNSEO FAQ ♡<br>제공해 준 질문과 답변을 기준으로 정리했어요.</div>
+   modalContent.innerHTML=`<div class="notice">KIM JUNSEO FAQ ♡</div>
    <div class="faq-item"><div class="faq-q">Q. 왜 콩프가 별명인가요?</div><div class="faq-a">콩나물의 세포가 잘생겨서 세포부터 잘생겼다는 의미와, 콩나물처럼 쑥쑥 자라라는 뜻으로 친구가 붙여 준 별명입니다. 그 이후로 ‘콩나물 프린스’를 줄여 콩프가 별명이 되었어요!</div></div>
    <div class="faq-item"><div class="faq-q">Q. 모에화</div><div class="faq-a">여우나 강아지, 토끼, 포차코, 소두곰, 주먹밥 쿵야, 마메치 등이 있는데 보통 여우랑 포차코로 많이 하는 편입니다!<br>→ 참고로 준서 본인은 포차코에 굉장히 진심이십니다 / 주인장은 북극여우 파입니다.</div></div>
    <div class="faq-item"><div class="faq-q">Q. 편지 배송지?</div><div class="faq-a"><a href="https://artist.mnetplus.world/main/stg/ald1/contents/68ece06cba95443db584a520" target="_blank" rel="noopener">편지 배송지 관련 공지 확인하기 ↗</a><br>(위엔터로 보내도 준서에게 전달은 되지만, 시간이 오래 걸리거나 전달이 안 될 수도 있다고 합니다!)</div></div>
    <div class="faq-item"><div class="faq-q">Q. 준서한테 선물하고 싶은데 옷 사이즈나 신발 사이즈가 몇일까요?</div><div class="faq-a">상의 105 사이즈이고, 발 사이즈는 275인 걸로 알고 있습니다!</div></div>
    <div class="faq-item"><div class="faq-q">Q. 준서의 입덕 포인트?</div><div class="faq-a">저는 무엇보다 팬들을 사랑하는 마음이 제일 큰 입덕 포인트인 거 같아요! 실제로 버블 같은 소통 앱도 한 달에 안 오는 날을 한 손으로 셀 수 있을 정도로 자주 오고, 편지 하나하나에도 엄청나게 감동받고 기억해 주고 좋아해 줍니다!<br>(→ 그러니 준서에게 편지 많이 써 주시면 준서가 좋아할 거예요!)</div></div>
    <div class="faq-item"><div class="faq-q">Q. 준서 왜 일본어 잘하나요?</div><div class="faq-a">위아이 일본 앨범 발매하고 그럴 때, 준서가 일본어 독학으로 공부했었어요! 그 이후로도 계속 공부하기도 했습니다. 이 영상을 보시면 공부하는 모습을 보실 수 있다는 사실!!<br><a href="https://youtu.be/6KVjtO_ZxAQ?si=kru0ghHy5vBYst93" target="_blank" rel="noopener">일본어 공부 영상 보러 가기 ↗</a></div></div>
-   <div class="notice">원본 노션 페이지 ↗ <a href="${LINKS.faq}" target="_blank" rel="noopener">김준서 FAQ 열기</a></div>`;
- } else if(page==='twitter'){
-   modalContent.innerHTML=`<div class="notice">X의 자동 업데이트를 사이트에 직접 표시하려면 X API 인증 토큰과 서버 측 연동이 필요합니다. 현재는 실제 게시물을 임의로 만들지 않고, 최신 #준서 검색 결과로 연결합니다.<p><a href="${LINKS.twitter}" target="_blank" rel="noopener">X에서 @ALD1_offcial의 #준서 최신 게시물 보기 ↗</a></p><p><a href="https://x.com/ALD1_offcial" target="_blank" rel="noopener">공식 계정 열기 ↗</a></p></div><div class="x-embed"><a class="twitter-timeline" data-height="450" href="https://twitter.com/ALD1_offcial?ref_src=twsrc%5Etfw">Posts by @ALD1_offcial</a></div>`;
-   const s=document.createElement('script');s.src='https://platform.twitter.com/widgets.js';s.async=true;modalContent.appendChild(s);
- } else if(page==='instagram'){
-   modalContent.innerHTML=`<div class="insta-box"><div style="font-size:36px">◎ ♡</div><strong>@ald1.official</strong><p>Instagram 공식 계정과 #준서 검색 결과를 확인할 수 있어요.</p><p><a href="${LINKS.instagram}" target="_blank" rel="noopener">공식 Instagram 계정 열기 ↗</a></p><p><a href="https://www.instagram.com/explore/tags/%EC%A4%80%EC%84%9C/" target="_blank" rel="noopener">Instagram에서 #준서 검색 ↗</a></p><small>공개 게시물 자동 수집은 Meta API의 접근 권한과 정책에 따라 달라집니다. 현재는 계정 비밀번호나 인증 정보를 요구하지 않습니다.</small></div>`;
+
+ } else if(page==='twitter' || page==='instagram'){
+   const platform=page==='twitter'?'X / Twitter':'Instagram';
+   modalTitle.textContent='♡　'+platform+' · 업데이트 준비 중';
+   modalContent.innerHTML=`<div class="social-preview coming-soon" style="padding:22px 12px"><div style="font-size:30px">🔒 ♡ ☁</div><div class="coming-label">조금만 기다려 주세요!</div><div class="fence-art">♡ ║ ║ ║ ║ ♡</div><p>${platform} 연결 기능을 준비하고 있어요.<br>준비가 끝나면 이곳에서 만날 수 있도록 업데이트할게요.</p><div class="fence-art">╰ ♡ ───── ♡ ╯</div></div>`;
  } else if(page==='guestbook'){
    modalContent.innerHTML=`<div class="notice">방명록은 미니홈피 첫 화면에서 바로 남길 수 있어요 ☁</div><button class="action" id="backToGuestbookHome">첫 화면 방명록 보기 ♡</button>`;
    document.getElementById('backToGuestbookHome').addEventListener('click',()=>{close();showPage('home');document.querySelector('.home-guestbook').scrollIntoView({behavior:'smooth',block:'start'})});
