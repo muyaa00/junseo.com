@@ -374,7 +374,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 
 // Choose one greeting per calendar day, so the bubble changes daily.
 (function setDailyJunseoMessage(){
-  const messages = ["앨리즈 사랑해요!", "날이 맑아서 좋다", "맛있는 밥 먹어!", "깅영웡", "오늘 하늘이 예쁘다"];
+  const messages = ["앨리즈 사랑해요!", "맑은 날씨가 좋아!", "맛있는 밥 먹어!", "깅영웡", "항상 고마워요."];
   const now = new Date();
   const dayKey = now.getFullYear() * 10000 + (now.getMonth()+1) * 100 + now.getDate();
   let seed = dayKey;
