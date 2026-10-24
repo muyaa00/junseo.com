@@ -370,7 +370,7 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
       <article class="card"><div class="titlebar">▣　Profile <span>□ ×</span></div><div class="card-body"><h3>▣　Profile</h3><p>About. 준서</p><button class="action" data-page="profile">프로필 보기　→</button></div></article>
       <article class="card"><div class="titlebar">ⓘ　김준서 FAQ <span>□ ×</span></div><div class="card-body"><h3>ⓘ　FAQ</h3><p>자주 묻는 질문</p><button class="action" data-page="faq">바로가기　→</button></div></article>
       <article class="card"><div class="titlebar">♥　Twitter / X <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><p>X 게시물 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="twitter">조금만 기다려주세요!</button></div></article>
-      <article class="card"><div class="titlebar">◎　Instagram <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><p>Instagram 사진 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="instagram">업데이트 기다리기 ♡</button></div></article>
+      <article class="card"><div class="titlebar">◎　Instagram <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><p>Instagram 사진 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="instagram">조금만 기다려주세요!</button></div></article>
     </section>
     <section class="home-guestbook" style="margin:0 20px 22px;padding:18px;border:1px solid #cfe2fb;border-radius:8px;background:linear-gradient(180deg,#f8fbff,#edf6ff)">
       <div class="titlebar" style="margin:-18px -18px 14px;border-radius:8px 8px 0 0">✎　방명록 / Message <span>♡ ☁</span></div>
@@ -476,7 +476,6 @@ function renderBgm(){
   b.addEventListener('click',()=>{bgmTrack=track;bgmTitle.textContent=track.title;bgmArtist.textContent=track.artist+' · YouTube';renderBgm();startBgmTrack();});
   bgmList.appendChild(b);
  });
- document.querySelectorAll('[data-bgm-group]').forEach(b=>b.classList.toggle('active',b.dataset.bgmGroup===bgmGroup));
 }
 
 document.getElementById('bgmPlayCurrent').addEventListener('click',startBgmTrack);
