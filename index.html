@@ -321,7 +321,7 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 }
 .social-preview.coming-soon p { margin: 7px 0 0; font-size: 12px; color: #6682a8; line-height: 1.6; }
 
-</style>
+.jlog-list{display:grid;gap:5px;max-height:310px;overflow-y:auto;padding:2px}.jlog-track{cursor:pointer}.jlog-track.active{background:#dcecff;border-color:#8ebdff;font-weight:700}.modal-content .action{box-sizing:border-box;width:100%;margin-top:12px}\n</style>
 </head>
 <body>
 <div class="topbar"><nav><a href="#" data-page="home">⌂ 홈</a><a href="#" data-page="home">♡ 미니홈피</a><a href="#" data-page="profile" onclick="showPage('profile');return false;">♙ Profile</a><a href="#" data-page="faq" onclick="showPage('faq');return false;">✉ FAQ</a></nav><span>@muyaa_0　|　<a class="contact-link" href="https://spin-spin.com/muyya__?v=1792820494920" target="_blank" rel="noopener noreferrer">문의</a></span></div>
@@ -354,6 +354,8 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
       <button data-page="faq">ⓘ　김준서 FAQ</button>
       <button data-page="twitter">♥　Twitter / X</button>
       <button data-page="instagram">◎　Instagram</button>
+      <button data-page="fancam">📂　Fancam.zip</button>
+      <button data-page="jlog">▶　J-log</button>
     </nav>
     <div class="side-footer">♡　준서야<br>행복하자 ☁</div>
   </aside>
@@ -489,7 +491,7 @@ const overlay=document.getElementById('overlay'), modalTitle=document.getElement
 function showPage(page){
  document.querySelectorAll('.menu button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
  if(page==='home'){mainTitle.textContent='⌂　Main';return}
- const titles={profile:'▣　Profile',faq:'ⓘ　김준서 FAQ',twitter:'♥　Twitter / X · #준서',instagram:'◎　Instagram · #준서',guestbook:'✎　방명록 / Message'};
+ const titles={profile:'▣　Profile',faq:'ⓘ　김준서 FAQ',twitter:'♥　Twitter / X · #준서',instagram:'◎　Instagram · #준서',guestbook:'✎　방명록 / Message',fancam:'📂　Fancam.zip',jlog:'▶　J-log'};
  modalTitle.textContent=titles[page]||'Minihompy'; modalContent.innerHTML='';
  if(page==='profile'){
    modalContent.innerHTML=`<div class="notice">KIM JUN SEO · PROFILE ♡</div>
@@ -519,6 +521,25 @@ function showPage(page){
    const platform=page==='twitter'?'X / Twitter':'Instagram';
    modalTitle.textContent='♡　'+platform+' · 업데이트 준비 중';
    modalContent.innerHTML=`<div class="social-preview coming-soon" style="padding:22px 12px"><div style="font-size:30px">🔒 ♡ ☁</div><div class="coming-label">조금만 기다려 주세요!</div><p>${platform} 연결 기능을 준비하고 있어요.<br>준비가 끝나면 이곳에서 만날 수 있도록 업데이트할게요.</p></div>`;
+ } else if(page==='fancam'){
+   modalContent.innerHTML=`<div class="notice">📂 Fancam.zip ♡</div>
+   <p style="text-align:center;line-height:1.8">준서의 팬캠을 모아 볼 수 있는 페이지예요 ☁</p>
+   <a class="action" style="display:block;text-align:center;text-decoration:none" href="https://litt.ly/ald1_stage" target="_blank" rel="noopener">Fancam.zip 열기 ↗</a>`;
+ } else if(page==='jlog'){
+   const jlogs=[
+    ['sW3ADyubGi4','J-log 01'],['Hh6mvJxqazg','J-log 02'],['SI_5qIm7s-U','J-log 03'],['P6gV2FFBlRo','J-log 04'],
+    ['mFXQcVxmGBY','J-log 05'],['cwqV_inLPFs','J-log 06'],['ob7mFpIvkEU','J-log 07'],['D5lrP8TxJlI','J-log 08'],
+    ['aYWWQCmd5ac','J-log 09'],['trEZXViWIaw','J-log 10'],['EwuqkAy87pc','J-log 11'],['VUWo0aeTxa0','J-log 12'],
+    ['0xbq8pNAUj8','J-log 13'],['FFtuQila7Vo','J-log 14'],['UbRX_ktys4Q','J-log 15'],['ariWBEftfNU','J-log 16'],
+    ['gHXtarSNKn4','J-log 17'],['1PsabsH1P84','J-log 18'],['6KVjtO_ZxAQ','J-log 19'],['PLr8yIHnyaE','J-log 20'],
+    ['-uO-PANLnlo','J-log 21'],['wcOVyBFOuuA','J-log 22'],['erG50mdc1PA','J-log 23'],['CVDxulMPm_k','J-log 24'],
+    ['-8NfFKS2Pbk','J-log 25'],['G3842ytl7xg','J-log 26']
+   ];
+   modalContent.innerHTML='<div class="notice">J-log ♡</div><p style="line-height:1.7;text-align:center">보고 싶은 영상을 선택하면 여기에서 재생돼요 ☁</p><div id="jlogPlayer" style="margin:12px 0"></div><div class="jlog-list">'+jlogs.map((v,i)=>'<button type="button" class="bgm-track jlog-track" data-video="'+v[0]+'"><span class="track-no">'+String(i+1).padStart(2,'0')+'</span><span class="track-name">'+v[1]+'</span><span class="track-artist">▶</span></button>').join('')+'</div>';
+   const player=document.getElementById('jlogPlayer');
+   const playJlog=id=>{player.innerHTML='<div style="position:relative;width:100%;aspect-ratio:16/9"><iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0" title="J-log video player" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:8px" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>';modalContent.querySelectorAll('.jlog-track').forEach(b=>b.classList.toggle('active',b.dataset.video===id));};
+   modalContent.querySelectorAll('.jlog-track').forEach(b=>b.addEventListener('click',()=>playJlog(b.dataset.video)));
+   playJlog(jlogs[0][0]);
  } else if(page==='guestbook'){
    modalContent.innerHTML=`<div class="notice">방명록은 미니홈피 첫 화면에서 바로 남길 수 있어요 ☁</div><button class="action" id="backToGuestbookHome">첫 화면 방명록 보기 ♡</button>`;
    document.getElementById('backToGuestbookHome').addEventListener('click',()=>{close();showPage('home');document.querySelector('.home-guestbook').scrollIntoView({behavior:'smooth',block:'start'})});
