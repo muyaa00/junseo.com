@@ -342,7 +342,7 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
         </div>
         <div class="bgm-controls"><button id="bgmPlayCurrent" type="button">▶ 선택한 곡 재생</button></div>
         <div class="bgm-video" id="bgmVideo"><iframe id="bgmIframe" title="YouTube BGM player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-        <div class="bgm-tabs"><button type="button" class="active" data-bgm-group="ald1">ALPHA DRIVE ONE</button><button type="button" data-bgm-group="wei">WEi</button></div>
+        
         <div class="bgm-list" id="bgmList"></div>
         <p class="bgm-help">곡 제목을 누르면 페이지 안에서 바로 재생돼요. 일부 곡은 영상 연결을 준비 중이에요 ☁</p>
       </div>
@@ -369,7 +369,7 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
     <section class="cards">
       <article class="card"><div class="titlebar">▣　Profile <span>□ ×</span></div><div class="card-body"><h3>▣　Profile</h3><p>About. 준서</p><button class="action" data-page="profile">프로필 보기　→</button></div></article>
       <article class="card"><div class="titlebar">ⓘ　김준서 FAQ <span>□ ×</span></div><div class="card-body"><h3>ⓘ　FAQ</h3><p>자주 묻는 질문</p><button class="action" data-page="faq">바로가기　→</button></div></article>
-      <article class="card"><div class="titlebar">♥　Twitter / X <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><p>X 게시물 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="twitter">업데이트 기다리기 ♡</button></div></article>
+      <article class="card"><div class="titlebar">♥　Twitter / X <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><p>X 게시물 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="twitter">조금만 기다려주세요!</button></div></article>
       <article class="card"><div class="titlebar">◎　Instagram <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><p>Instagram 사진 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="instagram">업데이트 기다리기 ♡</button></div></article>
     </section>
     <section class="home-guestbook" style="margin:0 20px 22px;padding:18px;border:1px solid #cfe2fb;border-radius:8px;background:linear-gradient(180deg,#f8fbff,#edf6ff)">
@@ -423,36 +423,33 @@ updateDebutDDays();
 
 
 // YouTube-connected BGM playlist. Playback stays inside this page; tracks without a verified video ID show an in-page notice.
-const BGM={
- ald1:[
+const BGM=[
   {title:'FREAK ALARM',artist:'ALPHA DRIVE ONE',id:'P8VVnopM610'},
   {title:'FORMULA',artist:'ALPHA DRIVE ONE',id:'RmN-N_v-y6U'},
-  {title:'CHAINS',artist:'ALPHA DRIVE ONE',id:'JXD8tm38eTw'},
+  {title:'CINNAMON SHAKE',artist:'ALPHA DRIVE ONE',id:'houY-xCpqoQ'},
   {title:'Raw Flame',artist:'ALPHA DRIVE ONE',id:'rjiIOZCpbx4'},
   {title:'NEVER BEEN 2 HEAVEN',artist:'ALPHA DRIVE ONE',id:'XJ4XrrsnmuM'},
-  {title:'OMG!',artist:'ALPHA DRIVE ONE'},
-  {title:'Good Life',artist:'ALPHA DRIVE ONE'},
-  {title:'CINNAMON SHAKE',artist:'ALPHA DRIVE ONE',id:'houY-xCpqoQ'},
-  {title:'GO! GO!',artist:'ALPHA DRIVE ONE'},
-  {title:'BORN DIRE',artist:'ALPHA DRIVE ONE'},
-  {title:'Diamond Hour',artist:'ALPHA DRIVE ONE'},
-  {title:'Talk to me',artist:'ALPHA DRIVE ONE'}
- ],
- wei:[
-  {title:'TWILIGHT',artist:'WEi'},
-  {title:'All Or Nothing',artist:'WEi'},
-  {title:'BYE BYE BYE',artist:'WEi'},
-  {title:'Starry Night',artist:'WEi'},
-  {title:'Too Bad',artist:'WEi',id:'YmiKbzPtxoc'},
-  {title:'Maldives',artist:'WEi'},
-  {title:'Spray',artist:'WEi'},
-  {title:'OVERDRIVE',artist:'WEi'},
-  {title:'Gift For You',artist:'WEi'},
-  {title:'HOME',artist:'WEi'},
-  {title:'LOVE2YOU',artist:'WEi'}
- ]
-};
-let bgmGroup='ald1', bgmTrack=BGM.ald1[0];
+  {title:'CHAINS',artist:'ALPHA DRIVE ONE',id:'JXD8tm38eTw'},
+  {title:'OMG!',artist:'ALPHA DRIVE ONE',id:'GLDJ_C5sbjQ'},
+  {title:'GOOD LIFE',artist:'ALPHA DRIVE ONE',id:'Pi2r_pewZbI'},
+  {title:'GO! GO!',artist:'ALPHA DRIVE ONE',id:'yhJXFF0n4lY'},
+  {title:'BORN DIRE',artist:'ALPHA DRIVE ONE',id:'EbaCjKYCRn8'},
+  {title:'Diamond Hour',artist:'ALPHA DRIVE ONE',id:'2tH07ET_gNA'},
+  {title:'WELCOME home',artist:'ALPHA DRIVE ONE',id:'kSKpGUz3TPc'},
+  {title:'One More Time',artist:'ALPHA DRIVE ONE',id:'FqSXwtHNQgc'},
+  {title:'Talk to me',artist:'ALPHA DRIVE ONE',id:'6y4uCYbao24'},
+  {title:'NOT ENOUGH',artist:'WEi',id:'c2mIGJv1rQk'},
+  {title:'질주 (OVERDRIVE)',artist:'WEi',id:'t3Vqut-ziZU'},
+  {title:'눈이 내리면 따스히 안겨줄래요',artist:'WEi',id:'Y0aNMLVKv2U'},
+  {title:'GIFT FOR YOU',artist:'WEi',id:'tesgZnPBw1Q'},
+  {title:'LOVE2YOU',artist:'WEi',id:'BSHJDpow-bA'},
+  {title:'BYE BYE BYE',artist:'WEi',id:'E7Ff1p7plT8'},
+  {title:'Winter, Flower (겨울, 꽃)',artist:'WEi',id:'w4c9ddFOosI'},
+  {title:'TWILIGHT',artist:'WEi',id:'WOVvqLZgqTM'},
+  {title:'DOREMIFA',artist:'WEi',id:'qEXqakiOcks'},
+  {title:'Too Bad',artist:'WEi',id:'YmiKbzPtxoc'}
+];
+let bgmTrack=BGM[0];
 const bgmList=document.getElementById('bgmList'), bgmTitle=document.getElementById('bgmCurrentTitle'), bgmArtist=document.getElementById('bgmCurrentArtist'), bgmDisc=document.getElementById('bgmDisc'), bgmVideo=document.getElementById('bgmVideo');
 const bgmIframe=document.getElementById('bgmIframe');
 const bgmIframeMarkup=bgmIframe.outerHTML;
@@ -471,7 +468,7 @@ function startBgmTrack(){
 }
 function renderBgm(){
  bgmList.innerHTML='';
- BGM[bgmGroup].forEach((track,i)=>{
+ BGM.forEach((track,i)=>{
   const b=document.createElement('button');b.type='button';b.className='bgm-track'+(track===bgmTrack?' active':'');
   b.innerHTML='<span class="track-no">'+String(i+1).padStart(2,'0')+'</span><span class="track-name"></span><span class="track-artist">'+(track.id?'▶':'♪')+'</span>';
   b.querySelector('.track-name').textContent=track.title;
@@ -481,7 +478,7 @@ function renderBgm(){
  });
  document.querySelectorAll('[data-bgm-group]').forEach(b=>b.classList.toggle('active',b.dataset.bgmGroup===bgmGroup));
 }
-document.querySelectorAll('[data-bgm-group]').forEach(b=>b.addEventListener('click',()=>{bgmGroup=b.dataset.bgmGroup;bgmTrack=BGM[bgmGroup][0];bgmTitle.textContent=bgmTrack.title;bgmArtist.textContent=bgmTrack.artist+' · YouTube';bgmDisc.classList.remove('playing');renderBgm();}));
+
 document.getElementById('bgmPlayCurrent').addEventListener('click',startBgmTrack);
 renderBgm();
 
