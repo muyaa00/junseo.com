@@ -72,7 +72,7 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 
 @media(max-width:760px){.bgm-window{margin:0 10px 14px}}
 
-@media(max-width:520px){.bio-list{grid-template-columns:100px minmax(0,1fr)}.bio-list div{padding:11px 12px;font-size:13px}.faq-q,.faq-a{font-size:13px}}
+@media(max-width:520px){.bio-list{grid-template-columns:100px minmax(0,1fr)}.bio-list div{padding:11px 12px;font-size:13px}.faq-q,.faq-a{font-size:13px}.bgm-video{width:100%}.bgm-controls button{min-height:38px;flex:1}.bgm-list{max-height:190px}.birthday-banner{margin:10px;padding:12px;font-size:13px;line-height:1.7}.overlay{padding:12px}.modal{height:92dvh}.modal-content{padding:14px}}
 
 
 .guestbook-form{display:grid;gap:8px;margin:16px 0}.guestbook-form label{font-size:13px;font-weight:bold;color:#4778b8}.guestbook-form input,.guestbook-form textarea{width:100%;border:1px solid #c6ddfb;border-radius:7px;padding:10px;font:inherit;font-size:13px;color:var(--ink);background:#fbfdff;resize:vertical}.guestbook-form input:focus,.guestbook-form textarea:focus{outline:2px solid #c3ddff}.guestbook-form .action{background:#edf6ff;border-color:#b9d5ff;text-align:center}.guestbook-note{font-size:11px;line-height:1.7;color:#7188a9;background:#f7fbff;border:1px dashed #c8defa;border-radius:7px;padding:10px}.guest-entries{display:grid;gap:9px;margin-top:14px}.guest-entry{border:1px solid #d5e6fb;border-radius:7px;padding:11px;background:#fbfdff}.guest-entry-head{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#4b7bb8}.guest-entry-head time{font-size:10px;color:#8aa0be}.guest-entry p{font-size:13px;line-height:1.7;white-space:normal;overflow-wrap:anywhere;margin:8px 0 0}.guest-empty{font-size:12px;color:#7d97bc;text-align:center;padding:18px}
@@ -98,7 +98,7 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
         <div class="bgm-video" id="bgmVideo"><iframe id="bgmIframe" title="YouTube BGM player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="bgm-tabs"><button type="button" class="active" data-bgm-group="ald1">ALPHA DRIVE ONE</button><button type="button" data-bgm-group="wei">WEi</button></div>
         <div class="bgm-list" id="bgmList"></div>
-        <p class="bgm-help">곡을 선택한 뒤 재생 버튼을 누르면 페이지 안에서 재생돼요. 아직 영상 연결이 안 된 곡은 이곳에 안내가 표시됩니다.</p>
+        <p class="bgm-help">곡 제목을 누르면 페이지 안에서 바로 재생돼요. 일부 곡은 영상 연결을 준비 중이에요 ☁</p>
       </div>
     </section>
     </div>
@@ -152,7 +152,7 @@ function updateDebutDDays(){
 }
 updateDebutDDays();
 
-// Birthday celebration automatically activates on November 20 in the visitor's local time.
+// Birthday celebration runs on November 20 (month index 10).
 (function initJunseoBirthday(){
  const now=new Date();
  if(now.getMonth()!==10||now.getDate()!==20)return;
@@ -180,12 +180,13 @@ updateDebutDDays();
 const BGM={
  ald1:[
   {title:'FREAK ALARM',artist:'ALPHA DRIVE ONE',id:'P8VVnopM610'},
-  {title:'FORMULA',artist:'ALPHA DRIVE ONE'},
-  {title:'Chains',artist:'ALPHA DRIVE ONE'},
-  {title:'Raw Flame',artist:'ALPHA DRIVE ONE'},
+  {title:'FORMULA',artist:'ALPHA DRIVE ONE',id:'RmN-N_v-y6U'},
+  {title:'CHAINS',artist:'ALPHA DRIVE ONE',id:'JXD8tm38eTw'},
+  {title:'Raw Flame',artist:'ALPHA DRIVE ONE',id:'rjiIOZCpbx4'},
+  {title:'NEVER BEEN 2 HEAVEN',artist:'ALPHA DRIVE ONE',id:'XJ4XrrsnmuM'},
   {title:'OMG!',artist:'ALPHA DRIVE ONE'},
   {title:'Good Life',artist:'ALPHA DRIVE ONE'},
-  {title:'Cinnamon Shake',artist:'ALPHA DRIVE ONE'},
+  {title:'CINNAMON SHAKE',artist:'ALPHA DRIVE ONE',id:'houY-xCpqoQ'},
   {title:'GO! GO!',artist:'ALPHA DRIVE ONE'},
   {title:'BORN DIRE',artist:'ALPHA DRIVE ONE'},
   {title:'Diamond Hour',artist:'ALPHA DRIVE ONE'},
@@ -209,31 +210,33 @@ let bgmGroup='ald1', bgmTrack=BGM.ald1[0];
 const bgmList=document.getElementById('bgmList'), bgmTitle=document.getElementById('bgmCurrentTitle'), bgmArtist=document.getElementById('bgmCurrentArtist'), bgmDisc=document.getElementById('bgmDisc'), bgmVideo=document.getElementById('bgmVideo');
 const bgmIframe=document.getElementById('bgmIframe');
 const bgmIframeMarkup=bgmIframe.outerHTML;
+function startBgmTrack(){
+ if(!bgmTrack.id){
+  bgmVideo.classList.add('show');
+  bgmVideo.innerHTML='<div style="height:100%;min-height:100px;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;color:#537ba9;font-size:12px;line-height:1.7">♪ '+bgmTrack.title+'<br>아직 이 곡의 영상이 연결되지 않았어요.<br>다른 곡을 선택해 주세요 ☁</div>';
+  bgmDisc.classList.remove('playing');
+  return;
+ }
+ if(!document.getElementById('bgmIframe')) bgmVideo.innerHTML=bgmIframeMarkup;
+ const currentIframe=document.getElementById('bgmIframe');
+ bgmVideo.classList.add('show');
+ currentIframe.src='https://www.youtube-nocookie.com/embed/'+bgmTrack.id+'?autoplay=1&rel=0';
+ bgmDisc.classList.add('playing');
+}
 function renderBgm(){
  bgmList.innerHTML='';
  BGM[bgmGroup].forEach((track,i)=>{
   const b=document.createElement('button');b.type='button';b.className='bgm-track'+(track===bgmTrack?' active':'');
   b.innerHTML='<span class="track-no">'+String(i+1).padStart(2,'0')+'</span><span class="track-name"></span><span class="track-artist">'+(track.id?'▶':'♪')+'</span>';
   b.querySelector('.track-name').textContent=track.title;
-  b.addEventListener('click',()=>{bgmTrack=track;bgmTitle.textContent=track.title;bgmArtist.textContent=track.artist+' · YouTube';bgmDisc.classList.remove('playing');renderBgm();});
+  b.setAttribute('aria-label',track.title+' 재생');
+  b.addEventListener('click',()=>{bgmTrack=track;bgmTitle.textContent=track.title;bgmArtist.textContent=track.artist+' · YouTube';renderBgm();startBgmTrack();});
   bgmList.appendChild(b);
  });
  document.querySelectorAll('[data-bgm-group]').forEach(b=>b.classList.toggle('active',b.dataset.bgmGroup===bgmGroup));
 }
 document.querySelectorAll('[data-bgm-group]').forEach(b=>b.addEventListener('click',()=>{bgmGroup=b.dataset.bgmGroup;bgmTrack=BGM[bgmGroup][0];bgmTitle.textContent=bgmTrack.title;bgmArtist.textContent=bgmTrack.artist+' · YouTube';bgmDisc.classList.remove('playing');renderBgm();}));
-document.getElementById('bgmPlayCurrent').addEventListener('click',()=>{
- if(!document.getElementById('bgmIframe')) bgmVideo.innerHTML=bgmIframeMarkup;
- const currentIframe=document.getElementById('bgmIframe');
- bgmVideo.classList.add('show');
- if(bgmTrack.id){
-  currentIframe.src='https://www.youtube-nocookie.com/embed/'+bgmTrack.id+'?autoplay=1&rel=0';
-  bgmDisc.classList.add('playing');
- }else{
-  currentIframe.removeAttribute('src');
-  bgmDisc.classList.remove('playing');
-  bgmVideo.innerHTML='<div style="height:100%;min-height:100px;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;color:#537ba9;font-size:12px;line-height:1.7">♪ '+bgmTrack.title+'<br>아직 이 곡의 영상이 연결되지 않았어요.<br>다른 곡을 선택해 주세요 ☁</div>';
- }
-});
+document.getElementById('bgmPlayCurrent').addEventListener('click',startBgmTrack);
 renderBgm();
 
 const LINKS={
