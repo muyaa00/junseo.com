@@ -178,6 +178,118 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
   .menu button { padding: 9px 7px; font-size: 12px; }
 }
 
+
+/* Strong mobile-only override: preserve desktop layout, stack mobile sections */
+@media screen and (max-width: 760px) {
+  html, body {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-x: clip !important;
+  }
+  body { min-height: 100dvh; }
+  .topbar {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 42px;
+    padding: 8px 12px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px;
+  }
+  .layout {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto 18px !important;
+    padding: 0 10px !important;
+    gap: 12px !important;
+  }
+  .sidebar, .main, .layout > .window {
+    display: block !important;
+    float: none !important;
+    position: relative;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    grid-column: auto !important;
+  }
+  .sidebar > .titlebar, .main > .titlebar { width: 100% !important; }
+  .sidebar > .avatar { display: none !important; }
+  .sidebar > .profile-mini {
+    display: block !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 10px !important;
+    padding: 10px !important;
+    overflow: visible;
+  }
+  .junseo-miniroom {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 0 auto 12px !important;
+    background-position: center center !important;
+    background-size: cover !important;
+  }
+  .junseo-bubble {
+    top: 4% !important;
+    left: 50% !important;
+    width: max-content;
+    max-width: 88% !important;
+    white-space: normal !important;
+    font-size: clamp(11px, 3.4vw, 14px) !important;
+  }
+  .bgm-window {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 0 4px !important;
+  }
+  .bgm-main, .bgm-now, .bgm-nowtext, .bgm-video, .bgm-list {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  .bgm-tabs { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .bgm-tabs button, .bgm-controls button { min-width: 0 !important; overflow-wrap: anywhere; }
+  .sidebar > .menu {
+    display: grid !important;
+    width: auto !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    padding: 0 10px 10px !important;
+  }
+  .main .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 12px !important;
+    gap: 12px !important;
+  }
+  .hero-photo { width: 100% !important; min-width: 0 !important; aspect-ratio: 4 / 3; min-height: 0 !important; }
+  .hero-photo img { display: block; width: 100% !important; height: 100% !important; min-height: 0 !important; object-fit: cover; }
+  .hero-note { width: 100% !important; min-width: 0 !important; overflow-wrap: anywhere; }
+  .cards { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; padding: 0 10px 10px !important; }
+  .card, .card-body, .home-guestbook { min-width: 0 !important; max-width: 100% !important; }
+  .home-guestbook { margin: 0 10px 14px !important; padding: 12px !important; }
+  footer { width: auto !important; margin: 0 10px 16px !important; }
+  .overlay { padding: 8px !important; }
+  .modal { width: 100% !important; max-width: 100% !important; height: 92dvh !important; }
+  .modal-content { min-width: 0 !important; overflow-wrap: anywhere; }
+}
+@media screen and (max-width: 380px) {
+  .layout { padding-left: 7px !important; padding-right: 7px !important; }
+  .sidebar > .profile-mini { margin: 7px !important; padding: 8px !important; }
+  .bgm-head { font-size: 11px !important; }
+  .bgm-controls button { flex: 1 1 100%; }
+}
+
 </style>
 </head>
 <body>
