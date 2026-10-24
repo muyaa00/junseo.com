@@ -575,6 +575,7 @@ document.addEventListener('click',e=>{
  const el=e.target.closest('[data-page]');
  if(!el)return;
  const page=el.dataset.page;
+ if(el.closest('.menu') && page==='fancam'){e.preventDefault();window.open('https://litt.ly/ald1_stage','_blank','noopener');return}
  if(el.closest('.menu') && page==='twitter'){e.preventDefault();window.open('https://x.com/ALD1_official','_blank','noopener');return}
  if(el.closest('.menu') && page==='instagram'){e.preventDefault();window.open('https://www.instagram.com/ald1.official/','_blank','noopener');return}
  if(page==='profile'||page==='faq'){e.preventDefault();showPage(page);return}
