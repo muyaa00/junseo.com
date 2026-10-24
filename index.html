@@ -78,13 +78,55 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 .guestbook-form{display:grid;gap:8px;margin:16px 0}.guestbook-form label{font-size:13px;font-weight:bold;color:#4778b8}.guestbook-form input,.guestbook-form textarea{width:100%;border:1px solid #c6ddfb;border-radius:7px;padding:10px;font:inherit;font-size:13px;color:var(--ink);background:#fbfdff;resize:vertical}.guestbook-form input:focus,.guestbook-form textarea:focus{outline:2px solid #c3ddff}.guestbook-form .action{background:#edf6ff;border-color:#b9d5ff;text-align:center}.guestbook-note{font-size:11px;line-height:1.7;color:#7188a9;background:#f7fbff;border:1px dashed #c8defa;border-radius:7px;padding:10px}.guest-entries{display:grid;gap:9px;margin-top:14px}.guest-entry{border:1px solid #d5e6fb;border-radius:7px;padding:11px;background:#fbfdff}.guest-entry-head{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#4b7bb8}.guest-entry-head time{font-size:10px;color:#8aa0be}.guest-entry p{font-size:13px;line-height:1.7;white-space:normal;overflow-wrap:anywhere;margin:8px 0 0}.guest-empty{font-size:12px;color:#7d97bc;text-align:center;padding:18px}
 @media(max-width:760px){.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:100px 1fr;align-items:center}.sidebar .titlebar{grid-column:1/-1}.avatar{height:100px;margin:10px}.avatar .heart{font-size:27px}.side-name{display:none}.profile-mini{margin:10px 10px 10px 0;min-width:0}.profile-mini .bgm-window{margin-top:10px}.profile-mini .bgm-head{padding:8px 9px;font-size:11px}.profile-mini .bgm-tabs button{font-size:10px}.profile-mini .bgm-now{padding:8px;gap:8px}.menu{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));padding:0 10px 10px}.side-footer{display:none}.hero{grid-template-columns:1fr}.hero-photo{min-height:190px}.hero-note{text-align:center}.cards{grid-template-columns:1fr}.topbar{padding:0 10px}.topbar nav{gap:9px}.topbar nav a:nth-child(2){display:none}}
 
-/* Daily Cyworld miniroom character above BGM */
-.junseo-miniroom{display:flex;flex-direction:column;align-items:center;gap:5px;margin:2px auto 12px;padding:8px 5px 10px;border:1px solid #c9defb;border-radius:9px;background:linear-gradient(180deg,#fafdff,#eaf4ff);}
-.junseo-bubble{position:relative;max-width:100%;padding:8px 10px;background:#fff;border:1px solid #8eb5eb;border-radius:14px;color:#426ba7;font-size:12px;font-weight:750;line-height:1.45;text-align:center;box-shadow:0 2px 0 #d8e8fc;overflow-wrap:anywhere;}
-.junseo-bubble:after{content:"";position:absolute;left:calc(50% - 5px);bottom:-6px;width:9px;height:9px;background:#fff;border-right:1px solid #8eb5eb;border-bottom:1px solid #8eb5eb;transform:rotate(45deg);}
-.junseo-mini-character{display:block;width:78px;height:94px;object-fit:contain;object-position:center bottom;image-rendering:pixelated;margin-top:2px;}
-.junseo-mini-caption{font-size:10px;color:#7998c5;letter-spacing:.04em;}
-@media(max-width:760px){.junseo-miniroom{margin:0 10px 10px;padding:7px}.junseo-mini-character{width:68px;height:82px}.junseo-bubble{font-size:12px}}
+/* Original miniroom image with daily speech bubble overlaid */
+.junseo-miniroom{
+  position:relative;
+  width:100%;
+  aspect-ratio:1 / 1;
+  margin:2px auto 12px;
+  padding:0;
+  overflow:hidden;
+  border:1px solid #b8d0f5;
+  border-radius:10px;
+  background:#dceaff url("images/junseo-miniroom.png") center center / cover no-repeat;
+  box-shadow:0 3px 10px #4b91d315;
+}
+.junseo-bubble{
+  position:absolute;
+  z-index:2;
+  top:4.5%;
+  left:50%;
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:82%;
+  padding:8px 12px;
+  background:#ffffffed;
+  border:1px solid #8eb5eb;
+  border-radius:15px;
+  color:#426ba7;
+  font-size:12px;
+  font-weight:750;
+  line-height:1.45;
+  text-align:center;
+  box-shadow:0 2px 0 #d8e8fc;
+  overflow-wrap:anywhere;
+}
+.junseo-bubble:after{
+  content:"";
+  position:absolute;
+  left:calc(50% - 5px);
+  bottom:-6px;
+  width:9px;
+  height:9px;
+  background:#fff;
+  border-right:1px solid #8eb5eb;
+  border-bottom:1px solid #8eb5eb;
+  transform:rotate(45deg);
+}
+@media(max-width:760px){
+  .junseo-miniroom{margin:0 10px 10px;width:calc(100% - 20px)}
+  .junseo-bubble{font-size:11px;padding:7px 10px;max-width:86%}
+}
 
 </style>
 </head>
@@ -94,12 +136,9 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 <div class="layout">
   <aside class="window sidebar">
     <div class="titlebar"><span>♡　KIM JUNSEO</span><span class="dots">•••</span></div>
-    <div class="avatar" style="padding:0;overflow:hidden"><img src="images/junseo-profile.png" alt="김준서 프로필 사진" style="width:100%;height:100%;object-fit:cover"></div>
     <div class="profile-mini">
-    <section class="junseo-miniroom" aria-label="준서의 미니룸 인사">
+    <section class="junseo-miniroom" aria-label="준서의 미니룸 사진과 오늘의 인사">
       <div class="junseo-bubble" id="junseoDailyMessage" aria-live="polite">앨리즈 사랑해요!</div>
-      <img class="junseo-mini-character" src="images/junseo-character.png" alt="준서의 픽셀 캐릭터">
-      <div class="junseo-mini-caption">JUNSEO'S MINIROOM ♡</div>
     </section>
     <section class="bgm-window" aria-label="BGM 플레이어">
       <div class="bgm-head"><span>♫　JUNSEO'S BGM ♡</span><span class="dots">♪ ♫ ♪</span></div>
