@@ -324,7 +324,7 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 </style>
 </head>
 <body>
-<div class="topbar"><nav><a href="#" data-page="home">⌂ 홈</a><a href="#" data-page="home">♡ 미니홈피</a><a href="#" data-page="profile">♙ Profile</a><a href="#" data-page="faq">✉ FAQ</a></nav><span>@muyaa_0　|　<a class="contact-link" href="https://spin-spin.com/muyya__?v=1792820494920" target="_blank" rel="noopener noreferrer">문의</a></span></div>
+<div class="topbar"><nav><a href="#" data-page="home">⌂ 홈</a><a href="#" data-page="home">♡ 미니홈피</a><a href="#" data-page="profile" onclick="showPage('profile');return false;">♙ Profile</a><a href="#" data-page="faq" onclick="showPage('faq');return false;">✉ FAQ</a></nav><span>@muyaa_0　|　<a class="contact-link" href="https://spin-spin.com/muyya__?v=1792820494920" target="_blank" rel="noopener noreferrer">문의</a></span></div>
 <div id="birthdayBanner" class="birthday-banner" role="status" aria-live="polite">🎂　HAPPY JUNSEO DAY　♡　준서야, 생일 축하해! 오늘 하루 누구보다 행복하길 ☁　🎉</div>
 <div class="layout">
   <aside class="window sidebar">
@@ -554,13 +554,15 @@ function showPage(page){
   finally{btn.disabled=false;btn.textContent='방명록 남기기 ♡'}
  });
 })();
-document.querySelectorAll('[data-page]').forEach(el=>el.addEventListener('click',e=>{
- e.preventDefault();
+document.addEventListener('click',e=>{
+ const el=e.target.closest('[data-page]');
+ if(!el)return;
  const page=el.dataset.page;
- if(el.closest('.menu') && page==='twitter'){window.open('https://x.com/ALD1_official','_blank','noopener');return}
- if(el.closest('.menu') && page==='instagram'){window.open('https://www.instagram.com/ald1.official/','_blank','noopener');return}
- showPage(page);
-}));
+ if(el.closest('.menu') && page==='twitter'){e.preventDefault();window.open('https://x.com/ALD1_official','_blank','noopener');return}
+ if(el.closest('.menu') && page==='instagram'){e.preventDefault();window.open('https://www.instagram.com/ald1.official/','_blank','noopener');return}
+ if(page==='profile'||page==='faq'){e.preventDefault();showPage(page);return}
+ e.preventDefault();showPage(page);
+});
 function close(){overlay.classList.remove('open');document.body.style.overflow=''}
 document.getElementById('closeModal').addEventListener('click',close);
 overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
