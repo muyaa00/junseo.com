@@ -369,8 +369,8 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
     <section class="cards">
       <article class="card"><div class="titlebar">▣　Profile <span>□ ×</span></div><div class="card-body"><h3>▣　Profile</h3><p>About. 준서</p><button class="action" data-page="profile">프로필 보기　→</button></div></article>
       <article class="card"><div class="titlebar">ⓘ　김준서 FAQ <span>□ ×</span></div><div class="card-body"><h3>ⓘ　FAQ</h3><p>자주 묻는 질문</p><button class="action" data-page="faq">바로가기　→</button></div></article>
-      <article class="card"><div class="titlebar">♥　Twitter / X <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><div class="fence-art">♡ ║ ║ ║ ♡</div><p>X 게시물 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="twitter">업데이트 기다리기 ♡</button></div></article>
-      <article class="card"><div class="titlebar">◎　Instagram <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><div class="fence-art">♡ ║ ║ ║ ♡</div><p>Instagram 사진 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="instagram">업데이트 기다리기 ♡</button></div></article>
+      <article class="card"><div class="titlebar">♥　Twitter / X <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><p>X 게시물 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="twitter">업데이트 기다리기 ♡</button></div></article>
+      <article class="card"><div class="titlebar">◎　Instagram <span>□ ×</span></div><div class="card-body"><div class="social-preview coming-soon"><div class="coming-label">🔒 잠시 준비 중이에요</div><p>Instagram 사진 연결 기능을 준비하고 있어요.<br>조금만 기다려 주세요 ☁</p></div><button class="action" data-page="instagram">업데이트 기다리기 ♡</button></div></article>
     </section>
     <section class="home-guestbook" style="margin:0 20px 22px;padding:18px;border:1px solid #cfe2fb;border-radius:8px;background:linear-gradient(180deg,#f8fbff,#edf6ff)">
       <div class="titlebar" style="margin:-18px -18px 14px;border-radius:8px 8px 0 0">✎　방명록 / Message <span>♡ ☁</span></div>
@@ -519,12 +519,11 @@ function showPage(page){
    <div class="faq-item"><div class="faq-q">Q. 편지 배송지?</div><div class="faq-a"><a href="https://artist.mnetplus.world/main/stg/ald1/contents/68ece06cba95443db584a520" target="_blank" rel="noopener">편지 배송지 관련 공지 확인하기 ↗</a><br>(위엔터로 보내도 준서에게 전달은 되지만, 시간이 오래 걸리거나 전달이 안 될 수도 있다고 합니다!)</div></div>
    <div class="faq-item"><div class="faq-q">Q. 준서한테 선물하고 싶은데 옷 사이즈나 신발 사이즈가 몇일까요?</div><div class="faq-a">상의 105 사이즈이고, 발 사이즈는 275인 걸로 알고 있습니다!</div></div>
    <div class="faq-item"><div class="faq-q">Q. 준서의 입덕 포인트?</div><div class="faq-a">저는 무엇보다 팬들을 사랑하는 마음이 제일 큰 입덕 포인트인 거 같아요! 실제로 버블 같은 소통 앱도 한 달에 안 오는 날을 한 손으로 셀 수 있을 정도로 자주 오고, 편지 하나하나에도 엄청나게 감동받고 기억해 주고 좋아해 줍니다!<br>(→ 그러니 준서에게 편지 많이 써 주시면 준서가 좋아할 거예요!)</div></div>
-   <div class="faq-item"><div class="faq-q">Q. 준서 왜 일본어 잘하나요?</div><div class="faq-a">위아이 일본 앨범 발매하고 그럴 때, 준서가 일본어 독학으로 공부했었어요! 그 이후로도 계속 공부하기도 했습니다. 이 영상을 보시면 공부하는 모습을 보실 수 있다는 사실!!<br><a href="https://youtu.be/6KVjtO_ZxAQ?si=kru0ghHy5vBYst93" target="_blank" rel="noopener">일본어 공부 영상 보러 가기 ↗</a></div></div>
-
+   <div class="faq-item"><div class="faq-q">Q. 준서 왜 일본어 잘하나요?</div><div class="faq-a">위아이 일본 앨범 발매하고 그럴 때, 준서가 일본어 독학으로 공부했었어요! 그 이후로도 계속 공부하기도 했습니다. 이 영상을 보시면 공부하는 모습을 보실 수 있다는 사실!!<br><a href="https://youtu.be/6KVjtO_ZxAQ?si=kru0ghHy5vBYst93" target="_blank" rel="noopener">일본어 공부 영상 보러 가기 ↗</a></div></div>`;
  } else if(page==='twitter' || page==='instagram'){
    const platform=page==='twitter'?'X / Twitter':'Instagram';
    modalTitle.textContent='♡　'+platform+' · 업데이트 준비 중';
-   modalContent.innerHTML=`<div class="social-preview coming-soon" style="padding:22px 12px"><div style="font-size:30px">🔒 ♡ ☁</div><div class="coming-label">조금만 기다려 주세요!</div><div class="fence-art">♡ ║ ║ ║ ║ ♡</div><p>${platform} 연결 기능을 준비하고 있어요.<br>준비가 끝나면 이곳에서 만날 수 있도록 업데이트할게요.</p><div class="fence-art">╰ ♡ ───── ♡ ╯</div></div>`;
+   modalContent.innerHTML=`<div class="social-preview coming-soon" style="padding:22px 12px"><div style="font-size:30px">🔒 ♡ ☁</div><div class="coming-label">조금만 기다려 주세요!</div><p>${platform} 연결 기능을 준비하고 있어요.<br>준비가 끝나면 이곳에서 만날 수 있도록 업데이트할게요.</p></div>`;
  } else if(page==='guestbook'){
    modalContent.innerHTML=`<div class="notice">방명록은 미니홈피 첫 화면에서 바로 남길 수 있어요 ☁</div><button class="action" id="backToGuestbookHome">첫 화면 방명록 보기 ♡</button>`;
    document.getElementById('backToGuestbookHome').addEventListener('click',()=>{close();showPage('home');document.querySelector('.home-guestbook').scrollIntoView({behavior:'smooth',block:'start'})});
@@ -556,7 +555,13 @@ function showPage(page){
   finally{btn.disabled=false;btn.textContent='방명록 남기기 ♡'}
  });
 })();
-document.querySelectorAll('[data-page]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();showPage(el.dataset.page)}));
+document.querySelectorAll('[data-page]').forEach(el=>el.addEventListener('click',e=>{
+ e.preventDefault();
+ const page=el.dataset.page;
+ if(el.closest('.menu') && page==='twitter'){window.open('https://x.com/ALD1_official','_blank','noopener');return}
+ if(el.closest('.menu') && page==='instagram'){window.open('https://www.instagram.com/ald1.official/','_blank','noopener');return}
+ showPage(page);
+}));
 function close(){overlay.classList.remove('open');document.body.style.overflow=''}
 document.getElementById('closeModal').addEventListener('click',close);
 overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
