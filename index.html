@@ -586,16 +586,26 @@ document.getElementById('closeModal').addEventListener('click',close);
 overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 
-// Choose one greeting per calendar day, so the bubble changes daily.
+// Pick a greeting at random once per local calendar day and remember it on this device.
 (function setDailyJunseoMessage(){
   const messages = ["앨리즈 사랑해요!", "날이 맑아서 좋다", "맛있는 밥 먹어!", "깅영웡", "오늘 하늘이 예쁘다"];
   const now = new Date();
-  const dayKey = now.getFullYear() * 10000 + (now.getMonth()+1) * 100 + now.getDate();
-  let seed = dayKey;
-  seed = (seed * 9301 + 49297) % 233280;
-  const index = Math.floor((seed / 233280) * messages.length);
+  const dayKey = now.getFullYear() + "-" + String(now.getMonth()+1).padStart(2,"0") + "-" + String(now.getDate()).padStart(2,"0");
   const bubble = document.getElementById('junseoDailyMessage');
-  if (bubble) bubble.textContent = messages[index];
+  if (!bubble) return;
+  try {
+    const saved = JSON.parse(localStorage.getItem('junseoDailyGreeting') || 'null');
+    let message = saved && saved.day === dayKey ? saved.message : null;
+    if (!message || !messages.includes(message)) {
+      const previous = saved && messages.includes(saved.message) ? saved.message : null;
+      const choices = messages.filter(item => item !== previous);
+      message = choices[Math.floor(Math.random() * choices.length)];
+      localStorage.setItem('junseoDailyGreeting', JSON.stringify({day: dayKey, message}));
+    }
+    bubble.textContent = message;
+  } catch (error) {
+    bubble.textContent = messages[Math.floor(Math.random() * messages.length)];
+  }
 })();
 
 </script>
