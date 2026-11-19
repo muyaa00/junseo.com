@@ -649,7 +649,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 
     document.getElementById('birthdaySongButton').addEventListener('click', startBirthdaySong);
     document.getElementById('birthdayHideToday').addEventListener('click', () => {
-      try { localStorage.setItem('junseoBirthdayPopupDay', dayKey); } catch(e) {}
+      try { localStorage.setItem('junseoBirthdayHiddenDay', dayKey); } catch(e) {}
       close();
     });
 
@@ -678,7 +678,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   }
 
   let dismissedToday = false;
-  try { dismissedToday = localStorage.getItem('junseoBirthdayPopupDay') === dayKey; } catch(e) {}
+  try { dismissedToday = localStorage.getItem('junseoBirthdayHiddenDay') === dayKey; } catch(e) {}
   if (!dismissedToday) openBirthdayPopup();
 
   // Browsers may block sound until the visitor interacts with the page.
