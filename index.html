@@ -664,11 +664,25 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
       const url = 'https://szxdnpbuecibkcdwzddq.supabase.co/rest/v1/guestbook';
       const key = 'sb_publishable_mFivODzaPj-EAdbN3GfuBg_lWIj7afJ';
       try {
-        const response = await fetch(url, {method:'POST',headers:{'Content-Type':'application/json','apikey':key,'Authorization':'Bearer '+key,'Prefer':'return=minimal'},body:JSON.stringify({nickname:nickname,message:'🎂 준서 생일 축하 편지\\n'+message})});
+        const response = await fetch(url, {method:'POST',headers:{'Content-Type':'application/json','apikey':key,'Authorization':'Bearer '+key,'Prefer':'return=representation'},body:JSON.stringify({nickname:nickname,message:'🎂 준서 생일 축하 편지\\n'+message})});
         if (!response.ok) throw new Error('save failed');
-        status.textContent = '편지를 남겼어요! 준서에게 축하하는 마음이 잘 전해지길 ☁';
+        const savedRows = await response.json();
+        const savedEntry = savedRows && savedRows[0];
+        if (savedEntry) {
+          const list = document.getElementById('homeGuestEntries');
+          if (list) {
+            const card = document.createElement('article');
+            card.className = 'guest-entry';
+            const head = document.createElement('div'); head.className = 'guest-entry-head';
+            const author = document.createElement('strong'); author.textContent = savedEntry.nickname || nickname;
+            const date = document.createElement('time'); date.textContent = savedEntry.created_at ? new Date(savedEntry.created_at).toLocaleString('ko-KR') : '방금 전';
+            const text = document.createElement('p'); text.textContent = savedEntry.message || ('🎂 준서 생일 축하 편지\\n' + message);
+            head.append(author,date); card.append(head,text); list.prepend(card);
+          }
+        }
+        status.textContent = '편지를 저장했어요! 생일이 지나도 홈페이지 방명록에 계속 남아 있어요 ☁';
         e.currentTarget.reset();
-        button.textContent = '편지 보내기 완료 ♡';
+        button.textContent = '편지 저장 완료 ♡';
       } catch (error) {
         status.textContent = '전송하지 못했어요. 잠시 후 다시 시도해 주세요.';
         button.disabled = false; button.textContent = '생일 축하 편지 보내기 ♡';
