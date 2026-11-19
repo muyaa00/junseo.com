@@ -11,6 +11,7 @@
 @font-face{font-family:Pretendard;src:local("Pretendard"),local("Pretendard Variable");font-weight:100 900}
 body{margin:0;font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;color:var(--ink);background:#d9edff;background-image:radial-gradient(ellipse at 15% 20%,#fff 0 2%,transparent 22%),radial-gradient(ellipse at 80% 12%,#fff 0 1.5%,transparent 20%),linear-gradient(180deg,#80bdff,#eaf6ff 48%,#9bceff);background-attachment:fixed;min-height:100vh}
 a{color:inherit}.topbar{height:38px;background:#edf6ffdd;border-bottom:1px solid #aacfff;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:12px;letter-spacing:.02em;font-weight:500}
+.birthday-nav-btn{border:1px solid #b9d5fb;background:#f5f9ff;color:#315f9f;border-radius:7px;padding:5px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}.birthday-nav-btn:hover{background:#eaf3ff}
 .topbar nav{display:flex;gap:18px}.topbar a{text-decoration:none}.topbar a:hover{text-decoration:underline}
 .sky-note{max-width:1120px;margin:18px auto 10px;text-align:center;color:#fff;text-shadow:0 1px 5px #4788d4;font-size:clamp(18px,3vw,29px);font-weight:bold;letter-spacing:.06em}
 .layout{max-width:1180px;margin:0 auto 34px;padding:0 18px;display:grid;grid-template-columns:238px minmax(0,1fr);gap:18px}
@@ -409,7 +410,7 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 .jlog-list{display:grid;gap:5px;max-height:310px;overflow-y:auto;padding:2px}.jlog-track{cursor:pointer}.jlog-track.active{background:#dcecff;border-color:#8ebdff;font-weight:700}.modal-content .action{box-sizing:border-box;width:100%;margin-top:12px}\n</style>
 </head>
 <body>
-<div class="topbar"><nav><a href="#" data-page="home">⌂ 홈</a><a href="#" data-page="home">♡ 미니홈피</a><a href="#" data-page="profile" onclick="showPage('profile');return false;">♙ Profile</a><a href="#" data-page="faq" onclick="showPage('faq');return false;">✉ FAQ</a></nav><span>@muyaa_0　|　<a class="contact-link" href="https://spin-spin.com/muyya__?v=1792820494920" target="_blank" rel="noopener noreferrer">문의</a></span></div>
+<div class="topbar"><nav><a href="#" data-page="home">⌂ 홈</a><a href="#" data-page="home">♡ 미니홈피</a><a href="#" data-page="profile" onclick="showPage('profile');return false;">♙ Profile</a><a href="#" data-page="faq" onclick="showPage('faq');return false;">✉ FAQ</a><button type="button" class="birthday-nav-btn" onclick="window.openBirthdayPopupManual && window.openBirthdayPopupManual()">🎂 생일 편지</button></nav><span>@muyaa_0　|　<a class="contact-link" href="https://spin-spin.com/muyya__?v=1792820494920" target="_blank" rel="noopener noreferrer">문의</a></span></div>
 <div id="birthdayBanner" class="birthday-banner" role="status" aria-live="polite">🎂　HAPPY JUNSEO DAY　♡　준서야, 생일 축하해! 오늘 하루 누구보다 행복하길 ☁　🎉</div>
 <div class="layout">
   <aside class="window sidebar">
@@ -674,10 +675,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 // JUNSEO birthday event: November 20 only.
 (function initJunseoBirthday(){
   const now = new Date();
-  if (now.getMonth() !== 10 || now.getDate() !== 20) return;
+  const isBirthday = now.getMonth() === 10 && now.getDate() === 20;
 
   const bubble = document.getElementById('junseoDailyMessage');
-  if (bubble) bubble.textContent = '오늘 내 생일!';
+  if (isBirthday && bubble) bubble.textContent = '오늘 내 생일!';
 
   const overlay = document.getElementById('overlay');
   const title = document.getElementById('modalTitle');
@@ -798,9 +799,11 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
     startBirthdaySong();
   }
 
+  window.openBirthdayPopupManual = openBirthdayPopup;
+
   let dismissedToday = false;
   try { dismissedToday = localStorage.getItem('junseoBirthdayHiddenDay') === dayKey; } catch(e) {}
-  if (!dismissedToday) openBirthdayPopup();
+  if (isBirthday && !dismissedToday) openBirthdayPopup();
 
   // Browsers may block sound until the visitor interacts with the page.
   const startOnInteraction = () => {
