@@ -333,25 +333,25 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 #overlay .modal.birthday-modal #birthdayLetterEntries .guest-entry{
   border:1px solid #d5e6fb;
   border-radius:9px;
-  padding:13px 16px;
+  padding:14px 19px;
   background:#fff;
   box-sizing:border-box;
   width:100%;
   min-width:0;
   margin:0;
-  padding:11px;
   text-align:left;
 }
 #overlay .modal.birthday-modal #birthdayLetterEntries .guest-entry-head{
   width:100%;
   padding:0 3px;
+  gap:14px;
   min-width:0;
   align-items:center;
   text-align:left;
 }
 #overlay .modal.birthday-modal #birthdayLetterEntries .guest-entry-head time{
-  margin-right:2px;
-  padding-left:8px;
+  margin-right:3px;
+  padding-left:11px;
   text-align:right;
 }
 #overlay .modal.birthday-modal #birthdayLetterEntries .guest-entry p{
@@ -731,7 +731,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
     const empty=list.querySelector('.guest-empty'); if(empty)empty.remove();
     const card=document.createElement('article'); card.className='guest-entry birthday-letter-card';
     const head=document.createElement('div'); head.className='guest-entry-head';
-    const author=document.createElement('strong'); author.textContent='　'+(item.nickname||'ALLYZ');
+    const author=document.createElement('strong'); author.textContent='　　'+(item.nickname||'ALLYZ');
     const date=document.createElement('time'); date.textContent=item.created_at?new Date(item.created_at).toLocaleString('ko-KR'):'방금 전';
     const body=document.createElement('p'); body.style.whiteSpace='pre-wrap'; const rawMessage=String(item.message||''); body.textContent=rawMessage.replace(/^🎂 준서 생일 축하 편지/, '').replace(/\\+n|\/n|\r?\n/g, '　').replace(/^🎂\s*/, '');
     head.append(author,date); card.append(head,body); list.prepend(card);
