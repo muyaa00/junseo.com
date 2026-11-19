@@ -744,7 +744,13 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
       const r=await fetch(url,{headers:{'apikey':key,'Authorization':'Bearer '+key}});
       if(!r.ok)throw new Error('load');
       const rows=await r.json();
-      const letters=rows.filter(x=>String(x.message||'').startsWith('🎂 준서 생일 축하 편지'));
+      const birthdayLetters=rows.filter(x=>String(x.message||'').startsWith('🎂 준서 생일 축하 편지'));
+      const seen=new Set();
+      const letters=birthdayLetters.filter(x=>{
+        const key=String(x.nickname||'ALLYZ').trim().toLowerCase()+'|'+String(x.message||'').trim();
+        if(seen.has(key))return false;
+        seen.add(key);return true;
+      });
       list.innerHTML='';
       if(!letters.length){list.innerHTML='<p class="guest-empty">아직 도착한 편지가 없어요. 첫 편지를 남겨 주세요! ☁</p>';return;}
       letters.forEach(prependBirthdayLetter);
