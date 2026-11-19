@@ -331,6 +331,10 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
   gap:8px;
 }
 #overlay .modal.birthday-modal #birthdayLetterEntries .guest-entry{
+  border:1px solid #d5e6fb;
+  border-radius:9px;
+  padding:13px 16px;
+  background:#fff;
   box-sizing:border-box;
   width:100%;
   min-width:0;
@@ -340,9 +344,15 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 }
 #overlay .modal.birthday-modal #birthdayLetterEntries .guest-entry-head{
   width:100%;
+  padding:0 3px;
   min-width:0;
   align-items:center;
   text-align:left;
+}
+#overlay .modal.birthday-modal #birthdayLetterEntries .guest-entry-head time{
+  margin-right:2px;
+  padding-left:8px;
+  text-align:right;
 }
 #overlay .modal.birthday-modal #birthdayLetterEntries .guest-entry p{
   width:100%;
@@ -719,7 +729,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   function prependBirthdayLetter(item){
     const list=document.getElementById('birthdayLetterEntries'); if(!list)return;
     const empty=list.querySelector('.guest-empty'); if(empty)empty.remove();
-    const card=document.createElement('article'); card.className='guest-entry'; card.style.cssText='padding:9px 0;border-top:1px solid #e4eaf3';
+    const card=document.createElement('article'); card.className='guest-entry birthday-letter-card';
     const head=document.createElement('div'); head.className='guest-entry-head';
     const author=document.createElement('strong'); author.textContent='　'+(item.nickname||'ALLYZ');
     const date=document.createElement('time'); date.textContent=item.created_at?new Date(item.created_at).toLocaleString('ko-KR'):'방금 전';
