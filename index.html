@@ -298,19 +298,46 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
   margin-inline:auto;
 }
 #overlay:has(#birthdayLetters) .modal-content{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
   width:100%;
-  max-width:680px;
+  max-width:none;
   min-width:0;
-  margin-inline:auto;
+  margin:0;
   padding:20px 24px;
+  gap:0;
 }
-#overlay:has(#birthdayLetters) #birthdayLetters{
+#overlay:has(#birthdayLetters) .modal-content > .notice,
+#overlay:has(#birthdayLetters) .modal-content > #birthdaySongButton,
+#overlay:has(#birthdayLetters) .modal-content > #birthdayLetterForm,
+#overlay:has(#birthdayLetters) .modal-content > #birthdayLetters,
+#overlay:has(#birthdayLetters) .modal-content > #birthdayHideToday{
+  display:block;
   box-sizing:border-box;
   width:100%;
-  margin-inline:0;
+  max-width:none;
+  min-width:0;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  align-self:stretch;
 }
-#overlay:has(#birthdayLetters) .guestbook-form,
-#overlay:has(#birthdayLetters) .notice{
+#overlay:has(#birthdayLetters) #birthdaySongButton,
+#overlay:has(#birthdayLetters) #birthdayHideToday{
+  text-align:center;
+}
+#overlay:has(#birthdayLetters) #birthdayLetters{
+  padding:14px !important;
+}
+#overlay:has(#birthdayLetters) #birthdayLetterEntries{
+  width:100%;
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+#overlay:has(#birthdayLetters) .guestbook-form input,
+#overlay:has(#birthdayLetters) .guestbook-form textarea,
+#overlay:has(#birthdayLetters) .guestbook-form button{
+  box-sizing:border-box;
   width:100%;
   min-width:0;
 }
@@ -627,7 +654,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   const content = document.getElementById('modalContent');
   const dayKey = now.getFullYear() + '-11-20';
   const songButton = '<button type="button" class="action" id="birthdaySongButton" style="width:100%;margin:12px 0">♫ 생일 축하 노래 다시 듣기</button>';
-  const letterForm = '<form id="birthdayLetterForm" class="guestbook-form"><label for="birthdayNickname">닉네임</label><input id="birthdayNickname" maxlength="24" placeholder="앨리즈" required><label for="birthdayMessage">준서에게 생일 축하 편지 쓰기</label><textarea id="birthdayMessage" maxlength="500" rows="5" placeholder="준서야, 생일 축하해! 오늘 하루 행복하게 보내 ☁" required></textarea><button class="action" type="submit">생일 축하 편지 보내기 ♡</button></form><p id="birthdayLetterStatus" class="guestbook-note">작성한 편지는 공개 방명록에 함께 표시돼요 ☁</p>';
+  const letterForm = '<form id="birthdayLetterForm" class="guestbook-form"><label for="birthdayNickname">닉네임</label><input id="birthdayNickname" maxlength="24" placeholder="앨리즈" required><label for="birthdayMessage">준서에게 생일 축하 편지 쓰기</label><textarea id="birthdayMessage" maxlength="500" rows="5" placeholder="준서야, 생일 축하해! 오늘 하루 행복하게 보내 ☁" required></textarea><button class="action" type="submit">생일 축하 편지 보내기 ♡</button></form><p id="birthdayLetterStatus" class="guestbook-note">작성한 편지는 이 생일 팝업에서만 볼 수 있어요 ☁</p>';
   const birthdaySong = [
     [523.25,0.32],[523.25,0.32],[587.33,0.64],[523.25,0.64],[698.46,0.64],[659.25,1.0],
     [523.25,0.32],[523.25,0.32],[587.33,0.64],[523.25,0.64],[783.99,0.64],[698.46,1.0],
@@ -676,7 +703,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
     const head=document.createElement('div'); head.className='guest-entry-head';
     const author=document.createElement('strong'); author.textContent=item.nickname||'ALLYZ';
     const date=document.createElement('time'); date.textContent=item.created_at?new Date(item.created_at).toLocaleString('ko-KR'):'방금 전';
-    const body=document.createElement('p'); body.style.whiteSpace='pre-wrap'; body.textContent=String(item.message||'').replace('🎂 준서 생일 축하 편지\\\\n','');
+    const body=document.createElement('p'); body.style.whiteSpace='pre-wrap'; body.textContent=String(item.message||'').replace(/^🎂 준서 생일 축하 편지/,'').replace(/^(?:\\\\+n|[\\r\\n])/, '').trimStart();
     head.append(author,date); card.append(head,body); list.prepend(card);
   }
   async function loadBirthdayLetters(){
