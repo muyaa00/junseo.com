@@ -291,59 +291,79 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 }
 
 
-/* Birthday popup alignment polish */
-#overlay:has(#birthdayLetters) .modal{
-  width:min(760px,100%);
-  height:min(88vh,760px);
-  margin-inline:auto;
+/* Birthday popup: consistent centered content and matching inner edges */
+#overlay .modal.birthday-modal{
+  width:min(720px,calc(100vw - 32px));
+  height:min(88dvh,780px);
+  margin:0 auto;
 }
-#overlay:has(#birthdayLetters) .modal-content{
-  display:flex;
-  flex-direction:column;
-  align-items:stretch;
+#overlay .modal.birthday-modal .modal-content{
+  display:block;
   width:100%;
   max-width:none;
   min-width:0;
   margin:0;
-  padding:20px 24px;
-  gap:0;
+  padding:20px;
+  overflow-x:hidden;
 }
-#overlay:has(#birthdayLetters) .modal-content > .notice,
-#overlay:has(#birthdayLetters) .modal-content > #birthdaySongButton,
-#overlay:has(#birthdayLetters) .modal-content > #birthdayLetterForm,
-#overlay:has(#birthdayLetters) .modal-content > #birthdayLetters,
-#overlay:has(#birthdayLetters) .modal-content > #birthdayHideToday{
-  display:block;
+#overlay .modal.birthday-modal .modal-content > .notice,
+#overlay .modal.birthday-modal .modal-content > #birthdaySongButton,
+#overlay .modal.birthday-modal .modal-content > #birthdayLetterForm,
+#overlay .modal.birthday-modal .modal-content > #birthdayLetters,
+#overlay .modal.birthday-modal .modal-content > #birthdayHideToday{
   box-sizing:border-box;
+  display:block;
   width:100%;
   max-width:none;
   min-width:0;
   margin-left:0 !important;
   margin-right:0 !important;
-  align-self:stretch;
 }
-#overlay:has(#birthdayLetters) #birthdaySongButton,
-#overlay:has(#birthdayLetters) #birthdayHideToday{
-  text-align:center;
-}
-#overlay:has(#birthdayLetters) #birthdayLetters{
+#overlay .modal.birthday-modal #birthdayLetters{
   padding:14px !important;
+  text-align:left;
 }
-#overlay:has(#birthdayLetters) #birthdayLetterEntries{
+#overlay .modal.birthday-modal #birthdayLetterEntries{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
   width:100%;
   min-width:0;
+  gap:8px;
+}
+#overlay .modal.birthday-modal #birthdayLetterEntries .guest-entry{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  margin:0;
+  padding:11px;
+  text-align:left;
+}
+#overlay .modal.birthday-modal #birthdayLetterEntries .guest-entry-head{
+  width:100%;
+  min-width:0;
+  align-items:center;
+  text-align:left;
+}
+#overlay .modal.birthday-modal #birthdayLetterEntries .guest-entry p{
+  width:100%;
+  margin:8px 0 0;
+  text-align:left;
   overflow-wrap:anywhere;
 }
-#overlay:has(#birthdayLetters) .guestbook-form input,
-#overlay:has(#birthdayLetters) .guestbook-form textarea,
-#overlay:has(#birthdayLetters) .guestbook-form button{
+#overlay .modal.birthday-modal .guestbook-form input,
+#overlay .modal.birthday-modal .guestbook-form textarea,
+#overlay .modal.birthday-modal .guestbook-form button{
   box-sizing:border-box;
   width:100%;
   min-width:0;
 }
+#overlay .modal.birthday-modal #birthdaySongButton,
+#overlay .modal.birthday-modal #birthdayHideToday{
+  text-align:center;
+}
 @media(max-width:600px){
-  #overlay:has(#birthdayLetters) .modal-content{padding:14px 12px}
-  #overlay:has(#birthdayLetters) .modal{height:92dvh}
+  #overlay .modal.birthday-modal{width:calc(100vw - 16px);height:92dvh}
+  #overlay .modal.birthday-modal .modal-content{padding:14px 12px}
 }
 
 /* Cute coming-soon fence for social features */
@@ -636,7 +656,7 @@ document.addEventListener('click',e=>{
  if(page==='profile'||page==='faq'){e.preventDefault();showPage(page);return}
  e.preventDefault();showPage(page);
 });
-function close(){overlay.classList.remove('open');document.body.style.overflow=''}
+function close(){overlay.classList.remove('open');document.querySelector('#overlay .modal').classList.remove('birthday-modal');document.body.style.overflow=''}
 document.getElementById('closeModal').addEventListener('click',close);
 overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
@@ -703,7 +723,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
     const head=document.createElement('div'); head.className='guest-entry-head';
     const author=document.createElement('strong'); author.textContent=item.nickname||'ALLYZ';
     const date=document.createElement('time'); date.textContent=item.created_at?new Date(item.created_at).toLocaleString('ko-KR'):'방금 전';
-    const body=document.createElement('p'); body.style.whiteSpace='pre-wrap'; body.textContent=String(item.message||'').replace(/^🎂 준서 생일 축하 편지/,'').replace(/^(?:\\\\+n|[\\r\\n])/, '').trimStart();
+    const body=document.createElement('p'); body.style.whiteSpace='pre-wrap'; body.textContent=String(item.message||'').replace(/^🎂 준서 생일 축하 편지(?:\\\\+n|\\r?\\n)/, '').replace(/^🎂\\s*/, '').trimStart();
     head.append(author,date); card.append(head,body); list.prepend(card);
   }
   async function loadBirthdayLetters(){
@@ -721,6 +741,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
     }catch(e){list.innerHTML='<p class="guest-empty">편지를 불러오지 못했어요 ☁</p>';}
   }
   function openBirthdayPopup(){
+    document.querySelector('#overlay .modal').classList.add('birthday-modal');
     title.textContent = '🎂　준서의 생일을 축하해요!';
     content.innerHTML = '<div class="notice" style="text-align:center"><div style="font-size:34px">🎂 ☁ ♡</div><strong style="font-size:18px">HAPPY JUNSEO DAY!</strong><p>11월 20일, 준서의 생일을 축하해요!<br>따뜻한 축하 편지를 남겨 주세요.</p></div>' + songButton + letterForm + '<section id="birthdayLetters" style="margin-top:16px;padding:12px;background:#f7faff;border-radius:14px"><strong>💌 준서에게 도착한 생일 편지</strong><div id="birthdayLetterEntries" style="max-height:190px;overflow:auto;margin-top:9px"><p class="guest-empty">편지를 불러오는 중이에요 ☁</p></div></section>' + '<button type="button" class="action" id="birthdayHideToday" style="width:100%;margin-top:10px;background:#f7faff">오늘 하루 안 보기</button>';
     overlay.classList.add('open');
