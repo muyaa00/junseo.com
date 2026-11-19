@@ -291,6 +291,34 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 }
 
 
+/* Birthday popup alignment polish */
+#overlay:has(#birthdayLetters) .modal{
+  width:min(760px,100%);
+  height:min(88vh,760px);
+  margin-inline:auto;
+}
+#overlay:has(#birthdayLetters) .modal-content{
+  width:100%;
+  max-width:680px;
+  min-width:0;
+  margin-inline:auto;
+  padding:20px 24px;
+}
+#overlay:has(#birthdayLetters) #birthdayLetters{
+  box-sizing:border-box;
+  width:100%;
+  margin-inline:0;
+}
+#overlay:has(#birthdayLetters) .guestbook-form,
+#overlay:has(#birthdayLetters) .notice{
+  width:100%;
+  min-width:0;
+}
+@media(max-width:600px){
+  #overlay:has(#birthdayLetters) .modal-content{padding:14px 12px}
+  #overlay:has(#birthdayLetters) .modal{height:92dvh}
+}
+
 /* Cute coming-soon fence for social features */
 .social-preview.coming-soon {
   position: relative;
