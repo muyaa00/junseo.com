@@ -780,9 +780,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
         const savedRows = await response.json();
         const savedEntry = savedRows && savedRows[0];
         if (savedEntry) prependBirthdayLetter(savedEntry);
-        status.textContent = '편지를 저장했어요! 이 팝업의 생일 편지함에 계속 보관돼요 ☁';
+        status.textContent = '준서에게 전송이 완료되었습니다! ♡';
         e.currentTarget.reset();
-        button.textContent = '편지 저장 완료 ♡';
+        button.textContent = '전송 완료 ♡';
+        window.alert('준서에게 전송이 완료되었습니다! ♡');
       } catch (error) {
         status.textContent = '전송하지 못했어요. 잠시 후 다시 시도해 주세요.';
         button.disabled = false; button.textContent = '생일 축하 편지 보내기 ♡';
