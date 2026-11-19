@@ -586,6 +586,101 @@ document.getElementById('closeModal').addEventListener('click',close);
 overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 
+// JUNSEO birthday event: November 20 only.
+(function initJunseoBirthday(){
+  const now = new Date();
+  const isBirthday = now.getMonth() === 10 && now.getDate() === 20;
+  if (!isBirthday) return;
+
+  const bubble = document.getElementById('junseoDailyMessage');
+  if (bubble) bubble.textContent = '오늘 내 생일!';
+
+  const songButton = '<button type="button" class="action" id="birthdaySongButton" style="width:100%;margin:12px 0">♫ 생일 축하 노래 다시 듣기</button>';
+  const letterForm = '<form id="birthdayLetterForm" class="guestbook-form"><label for="birthdayNickname">닉네임</label><input id="birthdayNickname" maxlength="24" placeholder="앨리즈" required><label for="birthdayMessage">준서에게 생일 축하 편지 쓰기</label><textarea id="birthdayMessage" maxlength="500" rows="5" placeholder="준서야, 생일 축하해! 오늘 하루 행복하게 보내 ☁" required></textarea><button class="action" type="submit">생일 축하 편지 보내기 ♡</button></form><p id="birthdayLetterStatus" class="guestbook-note">작성한 편지는 공개 방명록에 함께 표시돼요 ☁</p>';
+  const overlay = document.getElementById('overlay');
+  const title = document.getElementById('modalTitle');
+  const content = document.getElementById('modalContent');
+  const birthdaySong = [
+    [523.25,0.32],[523.25,0.32],[587.33,0.64],[523.25,0.64],[698.46,0.64],[659.25,1.0],
+    [523.25,0.32],[523.25,0.32],[587.33,0.64],[523.25,0.64],[783.99,0.64],[698.46,1.0],
+    [523.25,0.32],[523.25,0.32],[1046.5,0.64],[880,0.64],[698.46,0.64],[659.25,0.64],[587.33,1.0],
+    [932.33,0.32],[932.33,0.32],[880,0.64],[698.46,0.64],[783.99,0.64],[698.46,1.2]
+  ];
+  let audioContext = null, songPlayed = false;
+  function playBirthdaySong(){
+    if (songPlayed) return;
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    try {
+      audioContext = audioContext || new AudioCtx();
+      audioContext.resume().then(() => {
+        let at = audioContext.currentTime + 0.08;
+        birthdaySong.forEach(([frequency,duration]) => {
+          const osc = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          osc.type = 'sine'; osc.frequency.value = frequency;
+          gain.gain.setValueAtTime(0.0001, at);
+          gain.gain.exponentialRampToValueAtTime(0.12, at + 0.025);
+          gain.gain.exponentialRampToValueAtTime(0.0001, at + duration * 0.88);
+          osc.connect(gain); gain.connect(audioContext.destination);
+          osc.start(at); osc.stop(at + duration);
+          at += duration + 0.035;
+        });
+        songPlayed = true;
+        const btn = document.getElementById('birthdaySongButton');
+        if (btn) btn.textContent = '♫ 생일 축하 노래 재생 중!';
+      }).catch(() => {});
+    } catch (e) {}
+  }
+  function openBirthdayPopup(){
+    title.textContent = '🎂　준서의 생일을 축하해요!';
+    content.innerHTML = '<div class="notice" style="text-align:center"><div style="font-size:34px">🎂 ☁ ♡</div><strong style="font-size:18px">HAPPY JUNSEO DAY!</strong><p>11월 20일, 준서의 생일을 축하해요!<br>따뜻한 축하 편지를 남겨 주세요.</p></div>' + songButton + letterForm;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('birthdaySongButton').addEventListener('click', () => { songPlayed = false; playBirthdaySong(); });
+    document.getElementById('birthdayLetterForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const nickname = document.getElementById('birthdayNickname').value.trim();
+      const message = document.getElementById('birthdayMessage').value.trim();
+      const status = document.getElementById('birthdayLetterStatus');
+      const button = e.currentTarget.querySelector('button');
+      if (!nickname || !message) return;
+      button.disabled = true; button.textContent = '편지를 보내는 중…';
+      const url = 'https://szxdnpbuecibkcdwzddq.supabase.co/rest/v1/guestbook';
+      const key = 'sb_publishable_mFivODzaPj-EAdbN3GfuBg_lWIj7afJ';
+      try {
+        const response = await fetch(url, {method:'POST',headers:{'Content-Type':'application/json','apikey':key,'Authorization':'Bearer '+key,'Prefer':'return=minimal'},body:JSON.stringify({nickname:nickname,message:'🎂 준서 생일 축하 편지\n'+message})});
+        if (!response.ok) throw new Error('save failed');
+        status.textContent = '편지를 남겼어요! 준서에게 축하하는 마음이 잘 전해지길 ☁';
+        e.currentTarget.reset();
+        button.textContent = '편지 보내기 완료 ♡';
+      } catch (error) {
+        status.textContent = '전송하지 못했어요. 잠시 후 다시 시도해 주세요.';
+        button.disabled = false; button.textContent = '생일 축하 편지 보내기 ♡';
+      }
+    });
+    playBirthdaySong();
+  }
+  const dayKey = now.getFullYear() + '-11-20';
+  try {
+    if (localStorage.getItem('junseoBirthdayPopupDay') !== dayKey) {
+      localStorage.setItem('junseoBirthdayPopupDay', dayKey);
+      openBirthdayPopup();
+    }
+  } catch (e) { openBirthdayPopup(); }
+
+  // Browsers block sound that starts without a user gesture; start on the first interaction if needed.
+  const startOnInteraction = () => {
+    if (!songPlayed) playBirthdaySong();
+    if (songPlayed) {
+      document.removeEventListener('pointerdown', startOnInteraction);
+      document.removeEventListener('keydown', startOnInteraction);
+    }
+  };
+  document.addEventListener('pointerdown', startOnInteraction);
+  document.addEventListener('keydown', startOnInteraction);
+})(); 
+
 // Pick a greeting at random once per local calendar day and remember it on this device.
 (function setDailyJunseoMessage(){
   const messages = ["앨리즈 사랑해요!", "날이 맑아서 좋다", "맛있는 밥 먹어!", "깅영웡", "오늘 하늘이 예쁘다"];
