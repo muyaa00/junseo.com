@@ -723,7 +723,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
     const head=document.createElement('div'); head.className='guest-entry-head';
     const author=document.createElement('strong'); author.textContent=item.nickname||'ALLYZ';
     const date=document.createElement('time'); date.textContent=item.created_at?new Date(item.created_at).toLocaleString('ko-KR'):'방금 전';
-    const body=document.createElement('p'); body.style.whiteSpace='pre-wrap'; const rawMessage=String(item.message||''); body.textContent=rawMessage.replace(/^🎂 준서 생일 축하 편지/, '').replace(/^\\\\+n/, '　').replace(/^\\r?\\n/, '　').replace(/^🎂\\s*/, '').trimStart();
+    const body=document.createElement('p'); body.style.whiteSpace='pre-wrap'; const rawMessage=String(item.message||''); body.textContent=rawMessage.replace(/^🎂 준서 생일 축하 편지/, '').replace(/\\+n|\/n|\r?\n/g, '　').replace(/^🎂\s*/, '');
     head.append(author,date); card.append(head,body); list.prepend(card);
   }
   async function loadBirthdayLetters(){
