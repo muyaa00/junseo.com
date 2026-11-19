@@ -556,7 +556,7 @@ function showPage(page){
  const ready=SUPABASE_URL.startsWith('https://')&&!SUPABASE_URL.includes('YOUR_')&&!SUPABASE_ANON_KEY.includes('YOUR_')&&SUPABASE_ANON_KEY.length>10;
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  let entries=[];
- const render=()=>{if(!entries.length){box.innerHTML='<p class="guest-empty">첫 번째 방명록을 남겨 주세요! ☁</p>';return}box.innerHTML=entries.map(item=>`<article class="guest-entry"><div class="guest-entry-head"><strong>${esc(item.nickname||'ALLYZ')}</strong><time>${esc(item.created_at?new Date(item.created_at).toLocaleString('ko-KR'):item.date||'')}</time></div><p>${esc(item.message).replace(/\n/g,'<br>')}</p></article>`).join('')};
+ const render=()=>{const publicEntries=entries.filter(item=>!String(item.message||'').startsWith('🎂 준서 생일 축하 편지'));if(!publicEntries.length){box.innerHTML='<p class="guest-empty">첫 번째 방명록을 남겨 주세요! ☁</p>';return}box.innerHTML=publicEntries.map(item=>`<article class="guest-entry"><div class="guest-entry-head"><strong>${esc(item.nickname||'ALLYZ')}</strong><time>${esc(item.created_at?new Date(item.created_at).toLocaleString('ko-KR'):item.date||'')}</time></div><p>${esc(item.message).replace(/\n/g,'<br>')}</p></article>`).join('')};
  const headers=()=>({'Content-Type':'application/json','apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+SUPABASE_ANON_KEY,'Prefer':'return=representation'});
  async function load(){
   if(!ready){note.textContent='Supabase 연결 설정을 확인해 주세요 ☁';render();return}
@@ -641,12 +641,37 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
     } catch (e) {}
   }
 
+  function prependBirthdayLetter(item){
+    const list=document.getElementById('birthdayLetterEntries'); if(!list)return;
+    const empty=list.querySelector('.guest-empty'); if(empty)empty.remove();
+    const card=document.createElement('article'); card.className='guest-entry'; card.style.cssText='padding:9px 0;border-top:1px solid #e4eaf3';
+    const head=document.createElement('div'); head.className='guest-entry-head';
+    const author=document.createElement('strong'); author.textContent=item.nickname||'ALLYZ';
+    const date=document.createElement('time'); date.textContent=item.created_at?new Date(item.created_at).toLocaleString('ko-KR'):'방금 전';
+    const body=document.createElement('p'); body.style.whiteSpace='pre-wrap'; body.textContent=String(item.message||'').replace('🎂 준서 생일 축하 편지\\\\n','');
+    head.append(author,date); card.append(head,body); list.prepend(card);
+  }
+  async function loadBirthdayLetters(){
+    const list=document.getElementById('birthdayLetterEntries'); if(!list)return;
+    const url='https://szxdnpbuecibkcdwzddq.supabase.co/rest/v1/guestbook?select=id,nickname,message,created_at&order=created_at.desc&limit=200';
+    const key='sb_publishable_mFivODzaPj-EAdbN3GfuBg_lWIj7afJ';
+    try{
+      const r=await fetch(url,{headers:{'apikey':key,'Authorization':'Bearer '+key}});
+      if(!r.ok)throw new Error('load');
+      const rows=await r.json();
+      const letters=rows.filter(x=>String(x.message||'').startsWith('🎂 준서 생일 축하 편지'));
+      list.innerHTML='';
+      if(!letters.length){list.innerHTML='<p class="guest-empty">아직 도착한 편지가 없어요. 첫 편지를 남겨 주세요! ☁</p>';return;}
+      letters.forEach(prependBirthdayLetter);
+    }catch(e){list.innerHTML='<p class="guest-empty">편지를 불러오지 못했어요 ☁</p>';}
+  }
   function openBirthdayPopup(){
     title.textContent = '🎂　준서의 생일을 축하해요!';
-    content.innerHTML = '<div class="notice" style="text-align:center"><div style="font-size:34px">🎂 ☁ ♡</div><strong style="font-size:18px">HAPPY JUNSEO DAY!</strong><p>11월 20일, 준서의 생일을 축하해요!<br>따뜻한 축하 편지를 남겨 주세요.</p></div>' + songButton + letterForm + '<button type="button" class="action" id="birthdayHideToday" style="width:100%;margin-top:10px;background:#f7faff">오늘 하루 안 보기</button>';
+    content.innerHTML = '<div class="notice" style="text-align:center"><div style="font-size:34px">🎂 ☁ ♡</div><strong style="font-size:18px">HAPPY JUNSEO DAY!</strong><p>11월 20일, 준서의 생일을 축하해요!<br>따뜻한 축하 편지를 남겨 주세요.</p></div>' + songButton + letterForm + '<section id="birthdayLetters" style="margin-top:16px;padding:12px;background:#f7faff;border-radius:14px"><strong>💌 준서에게 도착한 생일 편지</strong><div id="birthdayLetterEntries" style="max-height:190px;overflow:auto;margin-top:9px"><p class="guest-empty">편지를 불러오는 중이에요 ☁</p></div></section>' + '<button type="button" class="action" id="birthdayHideToday" style="width:100%;margin-top:10px;background:#f7faff">오늘 하루 안 보기</button>';
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
 
+    loadBirthdayLetters();
     document.getElementById('birthdaySongButton').addEventListener('click', startBirthdaySong);
     document.getElementById('birthdayHideToday').addEventListener('click', () => {
       try { localStorage.setItem('junseoBirthdayHiddenDay', dayKey); } catch(e) {}
@@ -668,19 +693,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
         if (!response.ok) throw new Error('save failed');
         const savedRows = await response.json();
         const savedEntry = savedRows && savedRows[0];
-        if (savedEntry) {
-          const list = document.getElementById('homeGuestEntries');
-          if (list) {
-            const card = document.createElement('article');
-            card.className = 'guest-entry';
-            const head = document.createElement('div'); head.className = 'guest-entry-head';
-            const author = document.createElement('strong'); author.textContent = savedEntry.nickname || nickname;
-            const date = document.createElement('time'); date.textContent = savedEntry.created_at ? new Date(savedEntry.created_at).toLocaleString('ko-KR') : '방금 전';
-            const text = document.createElement('p'); text.textContent = savedEntry.message || ('🎂 준서 생일 축하 편지\\n' + message);
-            head.append(author,date); card.append(head,text); list.prepend(card);
-          }
-        }
-        status.textContent = '편지를 저장했어요! 생일이 지나도 홈페이지 방명록에 계속 남아 있어요 ☁';
+        if (savedEntry) prependBirthdayLetter(savedEntry);
+        status.textContent = '편지를 저장했어요! 이 팝업의 생일 편지함에 계속 보관돼요 ☁';
         e.currentTarget.reset();
         button.textContent = '편지 저장 완료 ♡';
       } catch (error) {
