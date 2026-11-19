@@ -410,7 +410,7 @@ footer{max-width:1180px;margin:0 auto 24px;padding:14px 20px;border:1px solid #a
 .jlog-list{display:grid;gap:5px;max-height:310px;overflow-y:auto;padding:2px}.jlog-track{cursor:pointer}.jlog-track.active{background:#dcecff;border-color:#8ebdff;font-weight:700}.modal-content .action{box-sizing:border-box;width:100%;margin-top:12px}\n</style>
 </head>
 <body>
-<div class="topbar"><nav><a href="#" data-page="home">⌂ 홈</a><a href="#" data-page="home">♡ 미니홈피</a><a href="#" data-page="profile" onclick="showPage('profile');return false;">♙ Profile</a><a href="#" data-page="faq" onclick="showPage('faq');return false;">✉ FAQ</a><button type="button" class="birthday-nav-btn" onclick="window.openBirthdayPopupManual && window.openBirthdayPopupManual()">🎂 Birthday</button></nav><span>@muyaa_0　|　<a class="contact-link" href="https://spin-spin.com/muyya__?v=1792820494920" target="_blank" rel="noopener noreferrer">문의</a></span></div>
+<div class="topbar"><nav><a href="#" data-page="home">⌂ 홈</a><a href="#" data-page="home">♡ 미니홈피</a><a href="#" data-page="profile" onclick="showPage('profile');return false;">♙ Profile</a><a href="#" data-page="faq" onclick="showPage('faq');return false;">✉ FAQ</a><button type="button" class="birthday-nav-btn" id="birthdayNavButton" style="display:none" onclick="window.openBirthdayPopupManual && window.openBirthdayPopupManual()">🎂 Birthday</button></nav><span>@muyaa_0　|　<a class="contact-link" href="https://spin-spin.com/muyya__?v=1792820494920" target="_blank" rel="noopener noreferrer">문의</a></span></div>
 <div id="birthdayBanner" class="birthday-banner" role="status" aria-live="polite">🎂　HAPPY JUNSEO DAY　♡　준서야, 생일 축하해! 오늘 하루 누구보다 행복하길 ☁　🎉</div>
 <div class="layout">
   <aside class="window sidebar">
@@ -676,6 +676,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 (function initJunseoBirthday(){
   const now = new Date();
   const isBirthday = now.getMonth() === 10 && now.getDate() === 20;
+  const birthdayNavButton = document.getElementById('birthdayNavButton');
+  if (birthdayNavButton) birthdayNavButton.style.display = isBirthday ? '' : 'none';
 
   const bubble = document.getElementById('junseoDailyMessage');
   if (isBirthday && bubble) bubble.textContent = '오늘 내 생일!';
