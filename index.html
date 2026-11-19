@@ -688,6 +688,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   const dayKey = now.getFullYear() + "-" + String(now.getMonth()+1).padStart(2,"0") + "-" + String(now.getDate()).padStart(2,"0");
   const bubble = document.getElementById('junseoDailyMessage');
   if (!bubble) return;
+  if (now.getMonth() === 10 && now.getDate() === 20) {
+    bubble.textContent = '오늘 내 생일!';
+    return;
+  }
   try {
     const saved = JSON.parse(localStorage.getItem('junseoDailyGreeting') || 'null');
     let message = saved && saved.day === dayKey ? saved.message : null;
